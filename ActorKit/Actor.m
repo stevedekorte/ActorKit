@@ -1,14 +1,14 @@
 //
-//  ActorKit.m
+//  Actor.m
 //  ActorKit
 //
 //  Created by Steve Dekorte on 20110830.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "ActorKit.h"
+#import "Actor.h"
 
-@implementation ActorKit
+@implementation Actor
 
 - (id)init
 {
