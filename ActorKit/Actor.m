@@ -49,7 +49,7 @@
 	[future setSelector:selector];
 	[future setArgument:anObject];
 	[firstFuture append:future];
-	[coroutine schedule];
+	[coroutine scheduleLast];
 	
 	return future;
 }

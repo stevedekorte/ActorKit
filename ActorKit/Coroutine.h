@@ -17,6 +17,7 @@
 	BOOL hasStarted;
 	Coroutine *next;
 	Coroutine *previous;
+	id waitingOnFuture;
 }
 
 @property (retain, nonatomic) id target;
@@ -24,11 +25,13 @@
 @property (readonly, nonatomic) BOOL hasStarted;
 @property (assign, nonatomic) Coroutine *next;
 @property (assign, nonatomic) Coroutine *previous;
+@property (assign, nonatomic) id waitingOnFuture;
 
 + (Coroutine *)mainCoroutine;
 + (Coroutine *)currentCoroutine;
 
-- (void)schedule;
+- (void)scheduleFirst;
+- (void)scheduleLast;
 - (void)unschedule;
 - (void)yield;
 

@@ -18,6 +18,7 @@ static NSMutableArray *scheduledCoroutines = nil;
 @synthesize hasStarted;
 @synthesize next;
 @synthesize previous;
+@synthesize waitingOnFuture;
 
 - (Coro *)coro
 {

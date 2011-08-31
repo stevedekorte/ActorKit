@@ -54,7 +54,7 @@
 
 - (void)send
 {
-	[actor performSelector:selector withObject:arguemnt];
+	[actor performSelector:selector withObject:argument];
 }
 
 - (void)setResult:(id)anObject
@@ -62,10 +62,10 @@
 	[self setValue:anObject];
 	done = YES;
 	
-	for(Coroutine *c in waitingCoroutines)
+	for(Coroutine *waitingCoroutine in waitingCoroutines)
 	{
 		[waitingCoroutine setWaitingOnFuture:nil];
-		[waitingCoroutine scheduleNext];
+		[waitingCoroutine scheduleLast];
 	}
 	 
 	[waitingCoroutines removeAllObjects];
@@ -73,7 +73,7 @@
 
 - (BOOL)isWaitingOnCurrentCoroutine
 {
-	for(Coroutine *c in waitingCoroutines)
+	for(Coroutine *waitingCoroutine in waitingCoroutines)
 	{
 		Future *waitingOnFuture = [waitingCoroutine waitingOnFuture];
 		if([waitingOnFuture isWaitingOnCurrentCoroutine]) return YES;
