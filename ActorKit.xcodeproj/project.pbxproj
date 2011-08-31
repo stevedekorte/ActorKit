@@ -1,0 +1,279 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AABB5D99140E0C220020BA06 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AABB5D98140E0C220020BA06 /* Cocoa.framework */; };
+		AABB5DA3140E0C220020BA06 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AABB5DA1140E0C220020BA06 /* InfoPlist.strings */; };
+		AABB5DA7140E0C220020BA06 /* ActorKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DA6140E0C220020BA06 /* ActorKit.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AABB5D95140E0C220020BA06 /* ActorKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ActorKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AABB5D98140E0C220020BA06 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		AABB5D9B140E0C220020BA06 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		AABB5D9C140E0C220020BA06 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		AABB5D9D140E0C220020BA06 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AABB5DA0140E0C220020BA06 /* ActorKit-Info.plist */ = {isa = PBXFileReference; path = "ActorKit-Info.plist"; sourceTree = "<group>"; };
+		AABB5DA2140E0C220020BA06 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AABB5DA4140E0C220020BA06 /* ActorKit-Prefix.pch */ = {isa = PBXFileReference; path = "ActorKit-Prefix.pch"; sourceTree = "<group>"; };
+		AABB5DA5140E0C220020BA06 /* ActorKit.h */ = {isa = PBXFileReference; path = ActorKit.h; sourceTree = "<group>"; };
+		AABB5DA6140E0C220020BA06 /* ActorKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActorKit.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AABB5D91140E0C220020BA06 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AABB5D99140E0C220020BA06 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AABB5D89140E0C220020BA06 = {
+			isa = PBXGroup;
+			children = (
+				AABB5D9E140E0C220020BA06 /* ActorKit */,
+				AABB5D97140E0C220020BA06 /* Frameworks */,
+				AABB5D96140E0C220020BA06 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AABB5D96140E0C220020BA06 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AABB5D95140E0C220020BA06 /* ActorKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AABB5D97140E0C220020BA06 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AABB5D98140E0C220020BA06 /* Cocoa.framework */,
+				AABB5D9A140E0C220020BA06 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AABB5D9A140E0C220020BA06 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AABB5D9B140E0C220020BA06 /* AppKit.framework */,
+				AABB5D9C140E0C220020BA06 /* CoreData.framework */,
+				AABB5D9D140E0C220020BA06 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		AABB5D9E140E0C220020BA06 /* ActorKit */ = {
+			isa = PBXGroup;
+			children = (
+				AABB5DA5140E0C220020BA06 /* ActorKit.h */,
+				AABB5DA6140E0C220020BA06 /* ActorKit.m */,
+				AABB5D9F140E0C220020BA06 /* Supporting Files */,
+			);
+			path = ActorKit;
+			sourceTree = "<group>";
+		};
+		AABB5D9F140E0C220020BA06 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AABB5DA0140E0C220020BA06 /* ActorKit-Info.plist */,
+				AABB5DA1140E0C220020BA06 /* InfoPlist.strings */,
+				AABB5DA4140E0C220020BA06 /* ActorKit-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		AABB5D92140E0C220020BA06 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		AABB5D94140E0C220020BA06 /* ActorKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AABB5DAA140E0C220020BA06 /* Build configuration list for PBXNativeTarget "ActorKit" */;
+			buildPhases = (
+				AABB5D90140E0C220020BA06 /* Sources */,
+				AABB5D91140E0C220020BA06 /* Frameworks */,
+				AABB5D92140E0C220020BA06 /* Headers */,
+				AABB5D93140E0C220020BA06 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ActorKit;
+			productName = ActorKit;
+			productReference = AABB5D95140E0C220020BA06 /* ActorKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AABB5D8B140E0C220020BA06 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = AABB5D8E140E0C220020BA06 /* Build configuration list for PBXProject "ActorKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AABB5D89140E0C220020BA06;
+			productRefGroup = AABB5D96140E0C220020BA06 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AABB5D94140E0C220020BA06 /* ActorKit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AABB5D93140E0C220020BA06 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AABB5DA3140E0C220020BA06 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AABB5D90140E0C220020BA06 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AABB5DA7140E0C220020BA06 /* ActorKit.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AABB5DA1140E0C220020BA06 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AABB5DA2140E0C220020BA06 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AABB5DA8140E0C220020BA06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		AABB5DA9140E0C220020BA06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AABB5DAB140E0C220020BA06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ActorKit/ActorKit-Prefix.pch";
+				INFOPLIST_FILE = "ActorKit/ActorKit-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		AABB5DAC140E0C220020BA06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ActorKit/ActorKit-Prefix.pch";
+				INFOPLIST_FILE = "ActorKit/ActorKit-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AABB5D8E140E0C220020BA06 /* Build configuration list for PBXProject "ActorKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AABB5DA8140E0C220020BA06 /* Debug */,
+				AABB5DA9140E0C220020BA06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AABB5DAA140E0C220020BA06 /* Build configuration list for PBXNativeTarget "ActorKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AABB5DAB140E0C220020BA06 /* Debug */,
+				AABB5DAC140E0C220020BA06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AABB5D8B140E0C220020BA06 /* Project object */;
+}
