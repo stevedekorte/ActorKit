@@ -121,7 +121,11 @@
 	
 	if(exception)
 	{
-		[exception raise]; // can you raise an exception twice?
+		// guessing we have to wrap the exception so the stack info of original will be available
+		NSException *e = [[NSException alloc] initWithName:@"Future" 
+			reason:@"exception during send" 
+			userInfo:[NSDictionary dictionaryWithObject:exception forKey:@"exception"]];
+		[e raise];
 	}
 	
 	return value;

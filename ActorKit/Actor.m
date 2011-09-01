@@ -60,7 +60,7 @@
 	{	
 		while (firstFuture)
 		{
-			[firstFuture send];
+			[firstFuture send]; // exceptions are caught within the send method
 			[self setFirstFuture:[firstFuture nextFuture]];
 			[coroutine yield];
 		}
