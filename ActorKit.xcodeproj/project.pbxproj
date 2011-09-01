@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		AABB5D99140E0C220020BA06 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AABB5D98140E0C220020BA06 /* Cocoa.framework */; };
 		AABB5DA3140E0C220020BA06 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AABB5DA1140E0C220020BA06 /* InfoPlist.strings */; };
-		AABB5DAF140E0C4B0020BA06 /* Actor.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DAD140E0C4B0020BA06 /* Actor.h */; };
-		AABB5DB0140E0C4B0020BA06 /* Actor.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DAE140E0C4B0020BA06 /* Actor.m */; };
 		AABB5DD4140EED090020BA06 /* 386-ucontext.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DC7140EED090020BA06 /* 386-ucontext.h */; };
 		AABB5DD5140EED090020BA06 /* amd64-ucontext.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DC8140EED090020BA06 /* amd64-ucontext.h */; };
 		AABB5DD6140EED090020BA06 /* asm.S in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DC9140EED090020BA06 /* asm.S */; };
@@ -27,6 +25,9 @@
 		AABB5DE2140EF4090020BA06 /* bsd_license.txt in Resources */ = {isa = PBXBuildFile; fileRef = AABB5DE1140EF4090020BA06 /* bsd_license.txt */; };
 		AABB5DEA140F0C8F0020BA06 /* NSURLConnection+Coroutine.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DE8140F0C8F0020BA06 /* NSURLConnection+Coroutine.m */; };
 		AABB5DEC140F12750020BA06 /* NSURLConnection+Coroutine.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DEB140F12750020BA06 /* NSURLConnection+Coroutine.h */; };
+		AABB5DEF140F16280020BA06 /* NSObject+Actor.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DED140F16280020BA06 /* NSObject+Actor.h */; };
+		AABB5DF0140F16280020BA06 /* NSObject+Actor.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DEE140F16280020BA06 /* NSObject+Actor.m */; };
+		AABB5DF2140F196E0020BA06 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AABB5DF1140F196E0020BA06 /* IOKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,8 +40,6 @@
 		AABB5DA2140E0C220020BA06 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AABB5DA4140E0C220020BA06 /* ActorKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ActorKit-Prefix.pch"; sourceTree = "<group>"; };
 		AABB5DA5140E0C220020BA06 /* ActorKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActorKit.h; sourceTree = "<group>"; };
-		AABB5DAD140E0C4B0020BA06 /* Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Actor.h; sourceTree = "<group>"; };
-		AABB5DAE140E0C4B0020BA06 /* Actor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Actor.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AABB5DC7140EED090020BA06 /* 386-ucontext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "386-ucontext.h"; sourceTree = "<group>"; };
 		AABB5DC8140EED090020BA06 /* amd64-ucontext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "amd64-ucontext.h"; sourceTree = "<group>"; };
 		AABB5DC9140EED090020BA06 /* asm.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = asm.S; sourceTree = "<group>"; };
@@ -57,6 +56,9 @@
 		AABB5DE1140EF4090020BA06 /* bsd_license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bsd_license.txt; path = license/bsd_license.txt; sourceTree = SOURCE_ROOT; };
 		AABB5DE8140F0C8F0020BA06 /* NSURLConnection+Coroutine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURLConnection+Coroutine.m"; path = "../NSURLConnection+Coroutine.m"; sourceTree = "<group>"; };
 		AABB5DEB140F12750020BA06 /* NSURLConnection+Coroutine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLConnection+Coroutine.h"; sourceTree = SOURCE_ROOT; };
+		AABB5DED140F16280020BA06 /* NSObject+Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Actor.h"; sourceTree = "<group>"; };
+		AABB5DEE140F16280020BA06 /* NSObject+Actor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Actor.m"; sourceTree = "<group>"; };
+		AABB5DF1140F196E0020BA06 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AABB5DF2140F196E0020BA06 /* IOKit.framework in Frameworks */,
 				AABB5D99140E0C220020BA06 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,6 +77,7 @@
 		AABB5D89140E0C220020BA06 = {
 			isa = PBXGroup;
 			children = (
+				AABB5DF1140F196E0020BA06 /* IOKit.framework */,
 				AABB5D9E140E0C220020BA06 /* ActorKit */,
 				AABB5D97140E0C220020BA06 /* Frameworks */,
 				AABB5D96140E0C220020BA06 /* Products */,
@@ -114,10 +118,10 @@
 				AABB5DA5140E0C220020BA06 /* ActorKit.h */,
 				AABB5DD0140EED090020BA06 /* Coroutine.h */,
 				AABB5DD1140EED090020BA06 /* Coroutine.m */,
-				AABB5DAD140E0C4B0020BA06 /* Actor.h */,
-				AABB5DAE140E0C4B0020BA06 /* Actor.m */,
 				AABB5DD2140EED090020BA06 /* Future.h */,
 				AABB5DD3140EED090020BA06 /* Future.m */,
+				AABB5DED140F16280020BA06 /* NSObject+Actor.h */,
+				AABB5DEE140F16280020BA06 /* NSObject+Actor.m */,
 				AABB5DEB140F12750020BA06 /* NSURLConnection+Coroutine.h */,
 				AABB5DE8140F0C8F0020BA06 /* NSURLConnection+Coroutine.m */,
 				AABB5D9F140E0C220020BA06 /* Supporting Files */,
@@ -167,7 +171,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AABB5DAF140E0C4B0020BA06 /* Actor.h in Headers */,
 				AABB5DD4140EED090020BA06 /* 386-ucontext.h in Headers */,
 				AABB5DD5140EED090020BA06 /* amd64-ucontext.h in Headers */,
 				AABB5DD7140EED090020BA06 /* Common.h in Headers */,
@@ -177,6 +180,7 @@
 				AABB5DDD140EED090020BA06 /* Coroutine.h in Headers */,
 				AABB5DDF140EED090020BA06 /* Future.h in Headers */,
 				AABB5DEC140F12750020BA06 /* NSURLConnection+Coroutine.h in Headers */,
+				AABB5DEF140F16280020BA06 /* NSObject+Actor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,13 +244,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AABB5DB0140E0C4B0020BA06 /* Actor.m in Sources */,
 				AABB5DD6140EED090020BA06 /* asm.S in Sources */,
 				AABB5DD8140EED090020BA06 /* context.c in Sources */,
 				AABB5DD9140EED090020BA06 /* Coro.c in Sources */,
 				AABB5DDE140EED090020BA06 /* Coroutine.m in Sources */,
 				AABB5DE0140EED090020BA06 /* Future.m in Sources */,
 				AABB5DEA140F0C8F0020BA06 /* NSURLConnection+Coroutine.m in Sources */,
+				AABB5DF0140F16280020BA06 /* NSObject+Actor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

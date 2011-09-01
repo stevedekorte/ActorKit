@@ -36,6 +36,8 @@ static NSMutableArray *scheduledCoroutines = nil;
 	{
 		mainCoroutine = [Coroutine alloc];
 		Coro_initializeMainCoro([mainCoroutine coro]);
+		[mainCoroutine setNext:mainCoroutine];
+		[mainCoroutine setPrevious:mainCoroutine];
 		currentCoroutine = mainCoroutine;
 		scheduledCoroutines = [[NSMutableArray alloc] init];
 	}
