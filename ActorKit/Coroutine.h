@@ -4,7 +4,8 @@
 //
 //  Created by Steve Dekorte on 20110830.
 //  Copyright 2011 Steve Dekorte. All rights reserved.
-
+//
+// I recommend using the Actor object and not this object directly
 
 #import <Foundation/Foundation.h>
 #import "Coro.h"

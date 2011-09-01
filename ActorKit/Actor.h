@@ -16,8 +16,12 @@
 	Coroutine *coroutine;
 }
 
+// private
+
 @property (retain, nonatomic) Future *firstFuture;
-@property (retain, nonatomic) Coroutine *coroutine; // private
+@property (retain, nonatomic) Coroutine *coroutine; 
+
+// public 
 
 - (void)asyncPerformSelector:(SEL)selector withObject:anObject;
 - (Future *)futurePerformSelector:(SEL)selector withObject:anObject;

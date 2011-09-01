@@ -147,7 +147,6 @@ static void callback(void *aCoroutine)
 	[aCoroutine setPrevious:previous];	
 	[previous setNext:aCoroutine];
 	[self setPrevious:aCoroutine];
-	
 }
 
 - (void)scheduleFirst
@@ -167,7 +166,16 @@ static void callback(void *aCoroutine)
 
 - (void)unschedule
 {
-	[self remove];
+	if(currentCoroutine == self)
+	{
+		Coroutine *nextCoroutine = [self next];
+		[self remove];
+		[nextCoroutine resume];
+	}
+	else
+	{
+		[self remove];
+	}
 }
 
 @end

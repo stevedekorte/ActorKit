@@ -17,7 +17,10 @@
 	BOOL done;
 	NSMutableSet *waitingCoroutines;
 	NSException *exception;
+	NSError *error;
 }
+
+// private
 
 @property (assign, nonatomic) id actor;
 @property (assign, nonatomic) SEL selector;
@@ -25,12 +28,17 @@
 @property (retain, nonatomic) id value;
 @property (retain, nonatomic) id nextFuture;
 @property (retain, nonatomic) NSMutableSet *waitingCoroutines;
-@property (retain, nonatomic) NSException *exception;
+@property (retain, nonatomic) NSError *error;
 
 - (void)append:(Future *)aFuture;
 - (void)send;
-
 - (void)setResult:(id)anObject;
+
+// public
+
+@property (retain, nonatomic) NSException *exception;
+
 - result;
+
 
 @end
