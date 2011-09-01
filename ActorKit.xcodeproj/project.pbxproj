@@ -23,11 +23,11 @@
 		AABB5DDF140EED090020BA06 /* Future.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DD2140EED090020BA06 /* Future.h */; };
 		AABB5DE0140EED090020BA06 /* Future.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DD3140EED090020BA06 /* Future.m */; };
 		AABB5DE2140EF4090020BA06 /* bsd_license.txt in Resources */ = {isa = PBXBuildFile; fileRef = AABB5DE1140EF4090020BA06 /* bsd_license.txt */; };
-		AABB5DEA140F0C8F0020BA06 /* NSURLConnection+Coroutine.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DE8140F0C8F0020BA06 /* NSURLConnection+Coroutine.m */; };
-		AABB5DEC140F12750020BA06 /* NSURLConnection+Coroutine.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DEB140F12750020BA06 /* NSURLConnection+Coroutine.h */; };
 		AABB5DEF140F16280020BA06 /* NSObject+Actor.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DED140F16280020BA06 /* NSObject+Actor.h */; };
 		AABB5DF0140F16280020BA06 /* NSObject+Actor.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DEE140F16280020BA06 /* NSObject+Actor.m */; };
 		AABB5DF2140F196E0020BA06 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AABB5DF1140F196E0020BA06 /* IOKit.framework */; };
+		AABB5DF9140F357A0020BA06 /* NSURLConnection+Coroutine.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DF7140F357A0020BA06 /* NSURLConnection+Coroutine.h */; };
+		AABB5DFA140F357A0020BA06 /* NSURLConnection+Coroutine.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DF8140F357A0020BA06 /* NSURLConnection+Coroutine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,11 +54,11 @@
 		AABB5DD2140EED090020BA06 /* Future.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Future.h; sourceTree = "<group>"; };
 		AABB5DD3140EED090020BA06 /* Future.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Future.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AABB5DE1140EF4090020BA06 /* bsd_license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bsd_license.txt; path = license/bsd_license.txt; sourceTree = SOURCE_ROOT; };
-		AABB5DE8140F0C8F0020BA06 /* NSURLConnection+Coroutine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURLConnection+Coroutine.m"; path = "../NSURLConnection+Coroutine.m"; sourceTree = "<group>"; };
-		AABB5DEB140F12750020BA06 /* NSURLConnection+Coroutine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLConnection+Coroutine.h"; sourceTree = SOURCE_ROOT; };
 		AABB5DED140F16280020BA06 /* NSObject+Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Actor.h"; sourceTree = "<group>"; };
 		AABB5DEE140F16280020BA06 /* NSObject+Actor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Actor.m"; sourceTree = "<group>"; };
 		AABB5DF1140F196E0020BA06 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		AABB5DF7140F357A0020BA06 /* NSURLConnection+Coroutine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLConnection+Coroutine.h"; sourceTree = "<group>"; };
+		AABB5DF8140F357A0020BA06 /* NSURLConnection+Coroutine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLConnection+Coroutine.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,8 +122,8 @@
 				AABB5DD3140EED090020BA06 /* Future.m */,
 				AABB5DED140F16280020BA06 /* NSObject+Actor.h */,
 				AABB5DEE140F16280020BA06 /* NSObject+Actor.m */,
-				AABB5DEB140F12750020BA06 /* NSURLConnection+Coroutine.h */,
-				AABB5DE8140F0C8F0020BA06 /* NSURLConnection+Coroutine.m */,
+				AABB5DF7140F357A0020BA06 /* NSURLConnection+Coroutine.h */,
+				AABB5DF8140F357A0020BA06 /* NSURLConnection+Coroutine.m */,
 				AABB5D9F140E0C220020BA06 /* Supporting Files */,
 			);
 			path = ActorKit;
@@ -179,8 +179,8 @@
 				AABB5DDC140EED090020BA06 /* taskimpl.h in Headers */,
 				AABB5DDD140EED090020BA06 /* Coroutine.h in Headers */,
 				AABB5DDF140EED090020BA06 /* Future.h in Headers */,
-				AABB5DEC140F12750020BA06 /* NSURLConnection+Coroutine.h in Headers */,
 				AABB5DEF140F16280020BA06 /* NSObject+Actor.h in Headers */,
+				AABB5DF9140F357A0020BA06 /* NSURLConnection+Coroutine.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,8 +249,8 @@
 				AABB5DD9140EED090020BA06 /* Coro.c in Sources */,
 				AABB5DDE140EED090020BA06 /* Coroutine.m in Sources */,
 				AABB5DE0140EED090020BA06 /* Future.m in Sources */,
-				AABB5DEA140F0C8F0020BA06 /* NSURLConnection+Coroutine.m in Sources */,
 				AABB5DF0140F16280020BA06 /* NSObject+Actor.m in Sources */,
+				AABB5DFA140F357A0020BA06 /* NSURLConnection+Coroutine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +360,7 @@
 				AABB5DAC140E0C220020BA06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
