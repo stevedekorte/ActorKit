@@ -107,13 +107,13 @@
 			isa = PBXGroup;
 			children = (
 				AABB5DBD140EED090020BA06 /* coroutine */,
+				AABB5DA5140E0C220020BA06 /* ActorKit.h */,
 				AABB5DD0140EED090020BA06 /* Coroutine.h */,
 				AABB5DD1140EED090020BA06 /* Coroutine.m */,
-				AABB5DD2140EED090020BA06 /* Future.h */,
-				AABB5DD3140EED090020BA06 /* Future.m */,
-				AABB5DA5140E0C220020BA06 /* ActorKit.h */,
 				AABB5DAD140E0C4B0020BA06 /* Actor.h */,
 				AABB5DAE140E0C4B0020BA06 /* Actor.m */,
+				AABB5DD2140EED090020BA06 /* Future.h */,
+				AABB5DD3140EED090020BA06 /* Future.m */,
 				AABB5D9F140E0C220020BA06 /* Supporting Files */,
 			);
 			path = ActorKit;
@@ -133,73 +133,9 @@
 		AABB5DBD140EED090020BA06 /* coroutine */ = {
 			isa = PBXGroup;
 			children = (
-				AABB5DBE140EED090020BA06 /* _build */,
-				AABB5DC3140EED090020BA06 /* docs */,
-				AABB5DC4140EED090020BA06 /* license */,
-				AABB5DC5140EED090020BA06 /* samples */,
 				AABB5DC6140EED090020BA06 /* source */,
 			);
 			path = coroutine;
-			sourceTree = "<group>";
-		};
-		AABB5DBE140EED090020BA06 /* _build */ = {
-			isa = PBXGroup;
-			children = (
-				AABB5DBF140EED090020BA06 /* dll */,
-				AABB5DC0140EED090020BA06 /* headers */,
-				AABB5DC1140EED090020BA06 /* lib */,
-				AABB5DC2140EED090020BA06 /* objs */,
-			);
-			path = _build;
-			sourceTree = "<group>";
-		};
-		AABB5DBF140EED090020BA06 /* dll */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = dll;
-			sourceTree = "<group>";
-		};
-		AABB5DC0140EED090020BA06 /* headers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = headers;
-			sourceTree = "<group>";
-		};
-		AABB5DC1140EED090020BA06 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		AABB5DC2140EED090020BA06 /* objs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = objs;
-			sourceTree = "<group>";
-		};
-		AABB5DC3140EED090020BA06 /* docs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = docs;
-			sourceTree = "<group>";
-		};
-		AABB5DC4140EED090020BA06 /* license */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = license;
-			sourceTree = "<group>";
-		};
-		AABB5DC5140EED090020BA06 /* samples */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = samples;
 			sourceTree = "<group>";
 		};
 		AABB5DC6140EED090020BA06 /* source */ = {

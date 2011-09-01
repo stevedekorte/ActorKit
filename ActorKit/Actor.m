@@ -31,7 +31,7 @@
 - (void)dealloc
 {
 	// coros retain the Future's they are waiting on, which retains the actor
-	// so dealloc shouldn't only occur when it's safe of dependencies 
+	// so dealloc should only occur when it's safe of dependencies 
 	[self setFirstFuture:nil];
 	[self setCoroutine:nil];
 	[super dealloc];
@@ -56,7 +56,7 @@
 
 - (void)runLoop
 {
-	while(YES)
+	while(YES) // coroutines never return, they are only unscheduled
 	{	
 		while (firstFuture)
 		{

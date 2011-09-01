@@ -16,6 +16,7 @@
 	id nextFuture;
 	BOOL done;
 	NSMutableSet *waitingCoroutines;
+	NSException *exception;
 }
 
 @property (assign, nonatomic) id actor;
@@ -24,6 +25,7 @@
 @property (retain, nonatomic) id value;
 @property (retain, nonatomic) id nextFuture;
 @property (retain, nonatomic) NSMutableSet *waitingCoroutines;
+@property (retain, nonatomic) NSException *exception;
 
 - (void)append:(Future *)aFuture;
 - (void)send;
