@@ -3,7 +3,7 @@
 //  ActorKit
 //
 //  Created by Steve Dekorte on 20110830.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Steve Dekorte. All rights reserved.
 //
 
 #import "Future.h"
@@ -60,9 +60,9 @@
 	{
 		[actor performSelector:selector withObject:argument];
 	}
-	@catch (NSException *exception) 
+	@catch (NSException *e) 
 	{
-		[self setException:exception];
+		[self setException:e];
 		[self setResult:nil];
 	}
 }
@@ -77,7 +77,7 @@
 		[waitingCoroutine setWaitingOnFuture:nil];
 		[waitingCoroutine scheduleLast];
 	}
-	 
+	
 	[waitingCoroutines removeAllObjects];
 }
 
@@ -96,7 +96,7 @@
 	return NO;
 }
 
-- (id)result
+- result
 {
 	if(done) 
 	{
@@ -112,7 +112,7 @@
 	[[Coroutine currentCoroutine] setWaitingOnFuture:self];
 	
 	[[Coroutine currentCoroutine] unschedule];
-
+	
 	while(!done) // loop in case exception is resumed 
 	{
 		[NSException raise:@"Future" format:@"attempt to resume coroutine waiting on future before result is ready"];
@@ -123,8 +123,8 @@
 	{
 		// guessing we have to wrap the exception so the stack info of original will be available
 		NSException *e = [[NSException alloc] initWithName:@"Future" 
-			reason:@"exception during send" 
-			userInfo:[NSDictionary dictionaryWithObject:exception forKey:@"exception"]];
+													reason:@"exception during send" 
+												  userInfo:[NSDictionary dictionaryWithObject:exception forKey:@"exception"]];
 		[e raise];
 	}
 	
