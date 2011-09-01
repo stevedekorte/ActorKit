@@ -3,7 +3,7 @@
 //  ActorKit
 //
 //  Created by Steve Dekorte on 20110831.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
 #import "NSURLConnection+Coroutine.h"
@@ -31,9 +31,9 @@
 	[coroutine unschedule]; // pauses coroutine until completionHandler resumes it
 	
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-	[dict setObject:theResponse forKey:@"response"];
-	[dict setObject:theData forKey:@"data"];
-	[dict setObject:theError forKey:@"error"];
+	[dict setObject:theResponse		forKey:@"response"];
+	[dict setObject:theData			forKey:@"data"];
+	[dict setObject:theError		forKey:@"error"];
 	return dict;
 }
 	 

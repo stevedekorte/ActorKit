@@ -3,9 +3,9 @@
 //  CoroutineKit
 //
 //  Created by Steve Dekorte on 20110830.
-//  Copyright 2011 Steve Dekorte. All rights reserved.
+//  Copyright 2011 Steve Dekorte. BSD licensed.
 //
-// I recommend using the Actor object and not this object directly
+// I recommend using the NSObject Actor category instead of this Class directly
 
 #import <Foundation/Foundation.h>
 #import "Coro.h"

@@ -3,13 +3,16 @@
 //  ActorKit
 //
 //  Created by Steve Dekorte on 20110831.
-//  Copyright 2011 Steve Dekorte. All rights reserved.
+//  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
 #import "NSObject+Actor.h"
 #import <objc/runtime.h>
 
+
 @implementation NSObject (NSObject_Actor)
+
+static long activeActorCount = 0;
 
 - (void)setFirstFuture:(Future *)aFuture
 {
@@ -21,21 +24,21 @@
 	return (Future *)objc_getAssociatedObject(self, "firstFuture");
 }
 
-- (void)setCoroutine:(Coroutine *)aCoroutine
+- (void)setActorCoroutine:(Coroutine *)aCoroutine
 {
-	objc_setAssociatedObject(self, "coroutine", aCoroutine, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+	objc_setAssociatedObject(self, "actorCoroutine", aCoroutine, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (Coroutine *)coroutine
+- (Coroutine *)actorCoroutine
 {
-	Coroutine *c = (Coroutine *)objc_getAssociatedObject(self, "coroutine");
+	Coroutine *c = (Coroutine *)objc_getAssociatedObject(self, "actorCoroutine");
 	
 	if(!c)
 	{
 		c = [[[Coroutine alloc] init] autorelease];
 		[c setTarget:self];
 		[c setAction:@selector(actorRunLoop)];
-		[self setCoroutine:c];
+		[self setActorCoroutine:c];
 	}
 	
 	return c;
@@ -64,7 +67,7 @@
 	[future setSelector:selector];
 	[future setArgument:anObject];
 	[[self firstFuture] append:future];
-	[[self coroutine] scheduleLast];
+	[[self actorCoroutine] scheduleLast];
 	
 	return future;
 }
@@ -73,14 +76,17 @@
 {
 	while(YES) // coroutines never return, they are only unscheduled
 	{	
-		while ([self firstFuture])
+		activeActorCount ++;
+		
+		while([self firstFuture])
 		{
 			[[self firstFuture] send]; // exceptions are caught within the send method
 			[self setFirstFuture:[[self firstFuture] nextFuture]];
-			[[self coroutine] yield];
+			[[self actorCoroutine] yield];
 		}
 		
-		[[self coroutine] unschedule];
+		activeActorCount --;
+		[[self actorCoroutine] unschedule];
 	}
 }
 

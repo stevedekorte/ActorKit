@@ -3,15 +3,14 @@
 //  CoroutineKit
 //
 //  Created by Steve Dekorte on 20110830.
-//  Copyright 2011 Steve Dekorte. All rights reserved.
+//  Copyright 2011 Steve Dekorte. BSD licensed.
 
 #import "Coroutine.h"
 
-static Coroutine *mainCoroutine = nil;
-static Coroutine *currentCoroutine = nil;
-static NSMutableArray *scheduledCoroutines = nil;
-
 @implementation Coroutine
+
+static Coroutine *mainCoroutine    = nil;
+static Coroutine *currentCoroutine = nil;
 
 @synthesize target;
 @synthesize action;
@@ -19,6 +18,44 @@ static NSMutableArray *scheduledCoroutines = nil;
 @synthesize next;
 @synthesize previous;
 @synthesize waitingOnFuture;
+
+static long activeCoroutineCount = 0;
+static NSTimer *activeCoroutineTimer = nil;
+
++ (void)incrementActiveCoroutineCount
+{
+	activeCoroutineCount ++;
+	
+	if(!activeCoroutineTimer)
+	{
+		activeCoroutineTimer = [NSTimer timerWithTimeInterval:1.0/30.0 
+															target:mainCoroutine 
+															selector:@selector(timer:)
+															userInfo:nil
+															repeats:YES];
+		[activeCoroutineTimer retain];
+	}
+	
+	if([activeCoroutineTimer isValid])
+	{
+		[activeCoroutineTimer fire];
+	}
+}
+							
++ (void)decrementActiveCoroutineCount
+{
+	activeCoroutineCount --;
+	
+	if(activeCoroutineCount == 0 && [activeCoroutineTimer isValid])
+	{
+		[activeCoroutineTimer invalidate];
+	}
+}
+
+- (void)timer:userInfo
+{
+	[mainCoroutine yield];
+}
 
 - (Coro *)coro
 {
@@ -39,7 +76,6 @@ static NSMutableArray *scheduledCoroutines = nil;
 		[mainCoroutine setNext:mainCoroutine];
 		[mainCoroutine setPrevious:mainCoroutine];
 		currentCoroutine = mainCoroutine;
-		scheduledCoroutines = [[NSMutableArray alloc] init];
 	}
 	
 	return mainCoroutine;
@@ -54,12 +90,14 @@ static NSMutableArray *scheduledCoroutines = nil;
 		[Coroutine mainCoroutine];
 		coro = Coro_new();
     }
-    
+	
+    [[self class] incrementActiveCoroutineCount];
     return self;
 }
 
 - (void)dealloc
 {
+    [[self class] decrementActiveCoroutineCount];
 	Coro_free(coro);
 	[super dealloc];
 }
