@@ -26,6 +26,7 @@
     
 	if (self) 
 	{
+		[self setWaitingCoroutines:[NSMutableSet set]];
         // Initialization code here.
     }
     
@@ -60,7 +61,12 @@
 {
 	@try 
 	{
-		[actor performSelector:selector withObject:argument];
+		printf("Future send [%s %s %s]\n", 
+			   [[actor className] UTF8String], 
+			   [NSStringFromSelector(selector) UTF8String], 
+			   [[argument className] UTF8String]);
+		id r = [actor performSelector:selector withObject:argument];
+		[self setResult:r];
 	}
 	@catch (NSException *e) 
 	{

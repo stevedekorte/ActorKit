@@ -10,6 +10,7 @@
 
 @interface NSURLConnection (NSURLConnection_Coroutine)
 
++ (NSDictionary *)requestURLString:(NSString *)urlString;
 + (NSDictionary *)sendRequest:(NSURLRequest *)request;
 
 @end

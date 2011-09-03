@@ -11,6 +11,16 @@
 
 @implementation NSURLConnection (NSURLConnection_Coroutine)
 
++ (NSDictionary *)requestURLString:(NSString *)urlString
+{
+	NSURL *url = [NSURL URLWithString:urlString];
+	
+	NSURLRequest *theRequest = [NSURLRequest requestWithURL:url
+											  cachePolicy:NSURLRequestUseProtocolCachePolicy
+										  timeoutInterval:60.0];
+	return [self sendRequest:theRequest];
+}
+
 + (NSDictionary *)sendRequest:(NSURLRequest *)request
 {
 	Coroutine *coroutine = [Coroutine currentCoroutine];

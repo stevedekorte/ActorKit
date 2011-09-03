@@ -39,6 +39,7 @@ static long activeActorCount = 0;
 		[c setTarget:self];
 		[c setAction:@selector(actorRunLoop)];
 		[self setActorCoroutine:c];
+		[c setName:[NSString stringWithFormat:@"%@", [self className]]];
 	}
 	
 	return c;
@@ -55,6 +56,22 @@ static long activeActorCount = 0;
 }
 */
 
+- (Future *)newFuture
+{
+	Future *future = [[[Future alloc] init] autorelease];
+	
+	if([self firstFuture])
+	{
+		[[self firstFuture] append:future];
+	}
+	else
+	{
+		[self setFirstFuture:future];
+	}
+	
+	return future;
+}
+
 - (void)asyncPerformSelector:(SEL)selector withObject:anObject
 {
 	[self futurePerformSelector:selector withObject:anObject];
@@ -62,11 +79,11 @@ static long activeActorCount = 0;
 
 - (Future *)futurePerformSelector:(SEL)selector withObject:anObject
 {
-	Future *future = [[[Future alloc] init] autorelease];
-	
+	Future *future = [self newFuture];
+
+	[future setActor:self];
 	[future setSelector:selector];
 	[future setArgument:anObject];
-	[[self firstFuture] append:future];
 	[[self actorCoroutine] scheduleLast];
 	
 	return future;
@@ -78,10 +95,16 @@ static long activeActorCount = 0;
 	{	
 		activeActorCount ++;
 		
+		if([Coroutine currentCoroutine] != [self actorCoroutine])
+		{
+			[NSException raise:@"Actor" format:@"actorRunLoop not running from actor coroutine!"];
+		}
+		
 		while([self firstFuture])
 		{
-			[[self firstFuture] send]; // exceptions are caught within the send method
-			[self setFirstFuture:[[self firstFuture] nextFuture]];
+			Future *f = [self firstFuture];
+			[f send]; // exceptions are caught within the send method
+			[self setFirstFuture:[f nextFuture]];
 			[[self actorCoroutine] yield];
 		}
 		
@@ -89,6 +112,5 @@ static long activeActorCount = 0;
 		[[self actorCoroutine] unschedule];
 	}
 }
-
 
 @end

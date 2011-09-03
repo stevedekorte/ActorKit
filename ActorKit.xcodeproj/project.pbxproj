@@ -7,26 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA2726621411886500FE0A43 /* ActorKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DA5140E0C220020BA06 /* ActorKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AABB5D99140E0C220020BA06 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AABB5D98140E0C220020BA06 /* Cocoa.framework */; };
 		AABB5DA3140E0C220020BA06 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AABB5DA1140E0C220020BA06 /* InfoPlist.strings */; };
-		AABB5DD4140EED090020BA06 /* 386-ucontext.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DC7140EED090020BA06 /* 386-ucontext.h */; };
-		AABB5DD5140EED090020BA06 /* amd64-ucontext.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DC8140EED090020BA06 /* amd64-ucontext.h */; };
+		AABB5DD4140EED090020BA06 /* 386-ucontext.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DC7140EED090020BA06 /* 386-ucontext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AABB5DD5140EED090020BA06 /* amd64-ucontext.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DC8140EED090020BA06 /* amd64-ucontext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AABB5DD6140EED090020BA06 /* asm.S in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DC9140EED090020BA06 /* asm.S */; };
-		AABB5DD7140EED090020BA06 /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DCA140EED090020BA06 /* Common.h */; };
+		AABB5DD7140EED090020BA06 /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DCA140EED090020BA06 /* Common.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AABB5DD8140EED090020BA06 /* context.c in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DCB140EED090020BA06 /* context.c */; };
 		AABB5DD9140EED090020BA06 /* Coro.c in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DCC140EED090020BA06 /* Coro.c */; };
-		AABB5DDA140EED090020BA06 /* Coro.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DCD140EED090020BA06 /* Coro.h */; };
-		AABB5DDB140EED090020BA06 /* power-ucontext.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DCE140EED090020BA06 /* power-ucontext.h */; };
-		AABB5DDC140EED090020BA06 /* taskimpl.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DCF140EED090020BA06 /* taskimpl.h */; };
-		AABB5DDD140EED090020BA06 /* Coroutine.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DD0140EED090020BA06 /* Coroutine.h */; };
+		AABB5DDA140EED090020BA06 /* Coro.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DCD140EED090020BA06 /* Coro.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AABB5DDB140EED090020BA06 /* power-ucontext.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DCE140EED090020BA06 /* power-ucontext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AABB5DDC140EED090020BA06 /* taskimpl.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DCF140EED090020BA06 /* taskimpl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AABB5DDD140EED090020BA06 /* Coroutine.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DD0140EED090020BA06 /* Coroutine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AABB5DDE140EED090020BA06 /* Coroutine.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DD1140EED090020BA06 /* Coroutine.m */; };
-		AABB5DDF140EED090020BA06 /* Future.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DD2140EED090020BA06 /* Future.h */; };
+		AABB5DDF140EED090020BA06 /* Future.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DD2140EED090020BA06 /* Future.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AABB5DE0140EED090020BA06 /* Future.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DD3140EED090020BA06 /* Future.m */; };
 		AABB5DE2140EF4090020BA06 /* bsd_license.txt in Resources */ = {isa = PBXBuildFile; fileRef = AABB5DE1140EF4090020BA06 /* bsd_license.txt */; };
-		AABB5DEF140F16280020BA06 /* NSObject+Actor.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DED140F16280020BA06 /* NSObject+Actor.h */; };
+		AABB5DEF140F16280020BA06 /* NSObject+Actor.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DED140F16280020BA06 /* NSObject+Actor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AABB5DF0140F16280020BA06 /* NSObject+Actor.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DEE140F16280020BA06 /* NSObject+Actor.m */; };
 		AABB5DF2140F196E0020BA06 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AABB5DF1140F196E0020BA06 /* IOKit.framework */; };
-		AABB5DF9140F357A0020BA06 /* NSURLConnection+Coroutine.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DF7140F357A0020BA06 /* NSURLConnection+Coroutine.h */; };
+		AABB5DF9140F357A0020BA06 /* NSURLConnection+Coroutine.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DF7140F357A0020BA06 /* NSURLConnection+Coroutine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AABB5DFA140F357A0020BA06 /* NSURLConnection+Coroutine.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DF8140F357A0020BA06 /* NSURLConnection+Coroutine.m */; };
 /* End PBXBuildFile section */
 
@@ -171,6 +172,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA2726621411886500FE0A43 /* ActorKit.h in Headers */,
 				AABB5DD4140EED090020BA06 /* 386-ucontext.h in Headers */,
 				AABB5DD5140EED090020BA06 /* amd64-ucontext.h in Headers */,
 				AABB5DD7140EED090020BA06 /* Common.h in Headers */,

@@ -19,14 +19,18 @@
 	Coroutine *next;
 	Coroutine *previous;
 	id waitingOnFuture;
+	NSString *name;
 }
 
-@property (retain, nonatomic) id target;
+// careful with this non-retains...
+
+@property (assign, nonatomic) id target;
 @property (assign, nonatomic) SEL action;
 @property (readonly, nonatomic) BOOL hasStarted;
 @property (assign, nonatomic) Coroutine *next;
 @property (assign, nonatomic) Coroutine *previous;
 @property (assign, nonatomic) id waitingOnFuture;
+@property (retain, nonatomic) NSString *name;
 
 + (Coroutine *)mainCoroutine;
 + (Coroutine *)currentCoroutine;
@@ -38,8 +42,13 @@
 
 // private
 
+- (id)initAsMain;
+
 - (size_t)stackSize;
 - (void)setStackSize:(size_t)size;
 - (size_t)bytesLeftOnStack;
+
+- (NSString *)nameId;
+- (void)showCoroutineList;
 
 @end
