@@ -6,25 +6,23 @@
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
-#import "Future.h"
+#import "ActorProxy.h"
+#import "FutureProxy.h"
 #import "NSThread+Actor.h"
 
-@implementation Future
+@implementation FutureProxy
 
 @synthesize lock;
 @synthesize actor;
-@synthesize selector;
-@synthesize argument;
+@synthesize futureInvocation;
 @synthesize value;
 @synthesize nextFuture;
 @synthesize waitingThreads;
 @synthesize exception;
-@synthesize error;
-@synthesize delegate;
 
 - (id)init
 {
-    self = [super init];
+    //self = [super init];
     
 	if (self) 
 	{
@@ -39,22 +37,20 @@
 - (void)dealloc
 {
 	[self setActor:nil];
-	[self setArgument:nil];
+	[self setFutureInvocation:nil];
 	[self setValue:nil];
 	[self setNextFuture:nil];
 	[self setWaitingThreads:nil];
 	[self setException:nil];
-	[self setError:nil];
-	[self setDelegate:nil];
 	[self setLock:nil];
 	[super dealloc];
 }
 
-- (void)append:(Future *)aFuture
+- (void)futureAppend:(FutureProxy *)aFuture
 {
 	if(nextFuture)
 	{
-		[nextFuture append:aFuture];
+		[nextFuture futureAppend:aFuture];
 	}
 	else
 	{
@@ -62,24 +58,28 @@
 	}
 }
 
-- (void)send
+- (void)futureShowSend
+{
+	NSLog(@"FutureProxy send [%@ %@]\n", 
+		   [[actor actorTarget] className], 
+		   NSStringFromSelector([futureInvocation selector]));
+}
+
+- (void)futureSend
 {
 	@try 
 	{
-		/*
-		printf("Future send [%s %s%s]\n", 
-			   [[actor className] UTF8String], 
-			   [NSStringFromSelector(selector) UTF8String], 
-			   [[argument className] UTF8String]);
-		*/
-		id r = [actor performSelector:selector withObject:argument];
-		[self setResult:r];
+		id r;
+		//[self futureShowSend];
+		[futureInvocation invokeWithTarget:[actor actorTarget]];
+		[futureInvocation getReturnValue:(void *)&r];
+		[self setFutureResult:r];
 	}
 	@catch (NSException *e) 
 	{
 		printf("exception\n");
 		[self setException:e];
-		[self setResult:nil];
+		[self setFutureResult:nil];
 	}
 	
 	for(NSThread *waitingThread in waitingThreads)
@@ -91,7 +91,7 @@
 	[lock resumeThread];
 }
 
-- (void)setResult:(id)anObject
+- (void)setFutureResult:(id)anObject
 {
 	if(done) 
 	{	
@@ -101,11 +101,6 @@
 	done = YES;
 
 	[self setValue:anObject];
-	
-	if (delegate && action) 
-	{
-		[delagate performSelector:action withObject:self];
-	}
 }
 
 - (BOOL)isWaitingOnCurrentThread
@@ -123,7 +118,7 @@
 	return NO;
 }
 
-- result
+- futureResult
 {
 	if(done) 
 	{
@@ -150,6 +145,17 @@
 	}
 	
 	return value;
+}
+
+- (void)forwardInvocation:(NSInvocation *)anInvocation
+{
+	id r = [self futureResult];
+	[anInvocation invokeWithTarget:r];
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
+{
+	return [[self futureResult] methodSignatureForSelector:aSelector];
 }
 
 @end

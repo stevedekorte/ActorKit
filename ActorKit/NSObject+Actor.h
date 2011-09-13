@@ -6,17 +6,10 @@
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
-#import "Future.h"
+#import "ActorProxy.h"
 
 @interface NSObject (NSObject_Actor)
 
-// private
-
-- (void)actorRunLoop:sender;
-
-// public
-
-- (void)asyncPerformSelector:(SEL)selector withObject:anObject;
-- (Future *)futurePerformSelector:(SEL)selector withObject:anObject;
+- (ActorProxy *)asActor;
 
 @end

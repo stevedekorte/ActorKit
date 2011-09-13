@@ -6,6 +6,7 @@
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
-#import "Future.h"
-#import "NSObject+Actor.h"
+#import "ActorProxy.h"
+#import "FutureProxy.h"
 #import "NSThread+Actor.h"
+#import "NSObject+Actor.h"
