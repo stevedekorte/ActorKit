@@ -7,7 +7,7 @@ About:
 	first-in-first-out order.
 
 	Any message to an actor returns a "future" object which is a proxy for the result
-	and only blocks when it is accessed.
+	and only blocks when it is accessed if the result isn't ready.
 	
 	Futures detect and raise an exception in situations that would cause a deadlock.
 
