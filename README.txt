@@ -24,7 +24,7 @@ Example:
 
 Notes:
 
-	// you'll beed to add this method because 
+	// you'll need to add this method for the above example because 
 	// dataWithContentsOfURL: is a class method but actors have to be instances
  
 	@implementation NSURL (fetch)
