@@ -1,12 +1,14 @@
 
 About:
 
-	ActorKit extends NSObject to allow all objects to become actors. 
+	ActorKit allows any object to become an actor. 
 
 	Each actor has an os thread and a queue of incoming messages which it processes in 
 	first-in-first-out order.
 
-	Any message to an actor returns a "future" object which only blocks when it is accessed. 
+	Any message to an actor returns a "future" object which is a proxy for the result
+	and only blocks when it is accessed.
+	
 	Futures detect and raise an exception in situations that would cause a deadlock.
 
 
