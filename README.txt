@@ -1,5 +1,8 @@
 
-ActorKit extends NSObject to allow all objects to become actors. An actor has an os thread and a queue of incoming messages which it processes in first-in-first-out order. A message to the actor can also return a "future" object which only blocks when the result is requested and is not yet ready and this is done without busy waits. Futures also support automatic deadlock avoidance by checking for deadlock loops when a result is requested.
+ActorKit extends NSObject to allow all objects to become actors. 
+
+An actor has an os thread and a queue of incoming messages which it processes in first-in-first-out order.
+Any message to the actor returns a "future" object which only blocks when it is accessed. These futures  automatically raise an exception in situations that would cause a deadlock.
 
 example:
 
