@@ -11,16 +11,20 @@ About:
 
 Example:
 
-	// look ma, no state machines or callbacks - these spawn threads and return immediately
+	// look ma, no state machines or callbacks
+	// these spawn threads to and return immediately
 	
-	NSURL *future1 = [[NSURL URLWithString:@"http://yahoo.com"] asActor];
-	NSURL *future2 = [[NSURL URLWithString:@"http://google.com"] asActor];
+	NSData *future1 = [(NSURL *)[[NSURL URLWithString:@"http://yahoo.com"] asActor] fetch];
+	NSData *future2 = [(NSURL *)[[NSURL URLWithString:@"http://google.com"] asActor] fetch];
 	
 	// now when we try to access the values, they block if the values aren't ready
 	
 	NSLog(@"request 1 returned %i bytes", (int)[future1 length]); 
 	NSLog(@"request 2 returned %i bytes", (int)[future2 length]);
 
+	// We just did a coordinated interaction between 3 threads without  
+	// lots of incomprehensible, bug prone code and by only adding two tokens?
+	// neat huh?
 
 Notes:
 
