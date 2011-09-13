@@ -8,21 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		AA2726621411886500FE0A43 /* ActorKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DA5140E0C220020BA06 /* ActorKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA2FB4A2141F533C00E57E01 /* ActorProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2FB49E141F533C00E57E01 /* ActorProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA2FB4A3141F533C00E57E01 /* ActorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2FB49F141F533C00E57E01 /* ActorProxy.m */; };
+		AA2FB4A4141F533C00E57E01 /* FutureProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2FB4A0141F533C00E57E01 /* FutureProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA2FB4A5141F533C00E57E01 /* FutureProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2FB4A1141F533C00E57E01 /* FutureProxy.m */; };
+		AA2FB4A9141F5EB700E57E01 /* NSObject+Actor.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2FB4A7141F5EB700E57E01 /* NSObject+Actor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA2FB4AA141F5EB700E57E01 /* NSObject+Actor.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2FB4A8141F5EB700E57E01 /* NSObject+Actor.m */; };
+		AA2FB4AC141FF34200E57E01 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA2FB4AB141FF34200E57E01 /* README.txt */; };
 		AA9A97881419785000A2994E /* NSThread+Actor.h in Headers */ = {isa = PBXBuildFile; fileRef = AA9A97861419785000A2994E /* NSThread+Actor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA9A97891419785000A2994E /* NSThread+Actor.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9A97871419785000A2994E /* NSThread+Actor.m */; };
 		AABB5D99140E0C220020BA06 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AABB5D98140E0C220020BA06 /* Cocoa.framework */; };
 		AABB5DA3140E0C220020BA06 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AABB5DA1140E0C220020BA06 /* InfoPlist.strings */; };
-		AABB5DDF140EED090020BA06 /* Future.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DD2140EED090020BA06 /* Future.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AABB5DE0140EED090020BA06 /* Future.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DD3140EED090020BA06 /* Future.m */; };
 		AABB5DE2140EF4090020BA06 /* bsd_license.txt in Resources */ = {isa = PBXBuildFile; fileRef = AABB5DE1140EF4090020BA06 /* bsd_license.txt */; };
-		AABB5DEF140F16280020BA06 /* NSObject+Actor.h in Headers */ = {isa = PBXBuildFile; fileRef = AABB5DED140F16280020BA06 /* NSObject+Actor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AABB5DF0140F16280020BA06 /* NSObject+Actor.m in Sources */ = {isa = PBXBuildFile; fileRef = AABB5DEE140F16280020BA06 /* NSObject+Actor.m */; };
 		AABB5DF2140F196E0020BA06 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AABB5DF1140F196E0020BA06 /* IOKit.framework */; };
-		AAD00991141F0ED200566C36 /* Mutex.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD0098F141F0ED200566C36 /* Mutex.h */; };
+		AAD00991141F0ED200566C36 /* Mutex.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD0098F141F0ED200566C36 /* Mutex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAD00992141F0ED200566C36 /* Mutex.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD00990141F0ED200566C36 /* Mutex.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA2FB49E141F533C00E57E01 /* ActorProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActorProxy.h; sourceTree = "<group>"; };
+		AA2FB49F141F533C00E57E01 /* ActorProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActorProxy.m; sourceTree = "<group>"; };
+		AA2FB4A0141F533C00E57E01 /* FutureProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FutureProxy.h; sourceTree = "<group>"; };
+		AA2FB4A1141F533C00E57E01 /* FutureProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FutureProxy.m; sourceTree = "<group>"; };
+		AA2FB4A7141F5EB700E57E01 /* NSObject+Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Actor.h"; sourceTree = "<group>"; };
+		AA2FB4A8141F5EB700E57E01 /* NSObject+Actor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Actor.m"; sourceTree = "<group>"; };
+		AA2FB4AB141FF34200E57E01 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = SOURCE_ROOT; };
 		AA9A97861419785000A2994E /* NSThread+Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSThread+Actor.h"; sourceTree = "<group>"; };
 		AA9A97871419785000A2994E /* NSThread+Actor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSThread+Actor.m"; sourceTree = "<group>"; };
 		AABB5D95140E0C220020BA06 /* ActorKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ActorKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,11 +44,7 @@
 		AABB5DA2140E0C220020BA06 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AABB5DA4140E0C220020BA06 /* ActorKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ActorKit-Prefix.pch"; sourceTree = "<group>"; };
 		AABB5DA5140E0C220020BA06 /* ActorKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActorKit.h; sourceTree = "<group>"; };
-		AABB5DD2140EED090020BA06 /* Future.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Future.h; sourceTree = "<group>"; };
-		AABB5DD3140EED090020BA06 /* Future.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Future.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AABB5DE1140EF4090020BA06 /* bsd_license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bsd_license.txt; path = license/bsd_license.txt; sourceTree = SOURCE_ROOT; };
-		AABB5DED140F16280020BA06 /* NSObject+Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Actor.h"; sourceTree = "<group>"; };
-		AABB5DEE140F16280020BA06 /* NSObject+Actor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Actor.m"; sourceTree = "<group>"; };
 		AABB5DF1140F196E0020BA06 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		AAD0098F141F0ED200566C36 /* Mutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mutex.h; sourceTree = "<group>"; };
 		AAD00990141F0ED200566C36 /* Mutex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mutex.m; sourceTree = "<group>"; };
@@ -97,15 +103,17 @@
 		AABB5D9E140E0C220020BA06 /* ActorKit */ = {
 			isa = PBXGroup;
 			children = (
+				AABB5DA5140E0C220020BA06 /* ActorKit.h */,
+				AA2FB49E141F533C00E57E01 /* ActorProxy.h */,
+				AA2FB49F141F533C00E57E01 /* ActorProxy.m */,
+				AA2FB4A0141F533C00E57E01 /* FutureProxy.h */,
+				AA2FB4A1141F533C00E57E01 /* FutureProxy.m */,
 				AAD0098F141F0ED200566C36 /* Mutex.h */,
 				AAD00990141F0ED200566C36 /* Mutex.m */,
-				AABB5DA5140E0C220020BA06 /* ActorKit.h */,
-				AABB5DD2140EED090020BA06 /* Future.h */,
-				AABB5DD3140EED090020BA06 /* Future.m */,
-				AABB5DED140F16280020BA06 /* NSObject+Actor.h */,
-				AABB5DEE140F16280020BA06 /* NSObject+Actor.m */,
 				AA9A97861419785000A2994E /* NSThread+Actor.h */,
 				AA9A97871419785000A2994E /* NSThread+Actor.m */,
+				AA2FB4A7141F5EB700E57E01 /* NSObject+Actor.h */,
+				AA2FB4A8141F5EB700E57E01 /* NSObject+Actor.m */,
 				AABB5D9F140E0C220020BA06 /* Supporting Files */,
 			);
 			path = ActorKit;
@@ -114,6 +122,7 @@
 		AABB5D9F140E0C220020BA06 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AA2FB4AB141FF34200E57E01 /* README.txt */,
 				AABB5DE1140EF4090020BA06 /* bsd_license.txt */,
 				AABB5DA0140E0C220020BA06 /* ActorKit-Info.plist */,
 				AABB5DA1140E0C220020BA06 /* InfoPlist.strings */,
@@ -130,10 +139,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA2726621411886500FE0A43 /* ActorKit.h in Headers */,
-				AABB5DDF140EED090020BA06 /* Future.h in Headers */,
 				AA9A97881419785000A2994E /* NSThread+Actor.h in Headers */,
-				AABB5DEF140F16280020BA06 /* NSObject+Actor.h in Headers */,
 				AAD00991141F0ED200566C36 /* Mutex.h in Headers */,
+				AA2FB4A2141F533C00E57E01 /* ActorProxy.h in Headers */,
+				AA2FB4A4141F533C00E57E01 /* FutureProxy.h in Headers */,
+				AA2FB4A9141F5EB700E57E01 /* NSObject+Actor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +197,7 @@
 			files = (
 				AABB5DA3140E0C220020BA06 /* InfoPlist.strings in Resources */,
 				AABB5DE2140EF4090020BA06 /* bsd_license.txt in Resources */,
+				AA2FB4AC141FF34200E57E01 /* README.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,10 +208,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AABB5DE0140EED090020BA06 /* Future.m in Sources */,
-				AABB5DF0140F16280020BA06 /* NSObject+Actor.m in Sources */,
 				AA9A97891419785000A2994E /* NSThread+Actor.m in Sources */,
 				AAD00992141F0ED200566C36 /* Mutex.m in Sources */,
+				AA2FB4A3141F533C00E57E01 /* ActorProxy.m in Sources */,
+				AA2FB4A5141F533C00E57E01 /* FutureProxy.m in Sources */,
+				AA2FB4AA141F5EB700E57E01 /* NSObject+Actor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

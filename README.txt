@@ -3,13 +3,15 @@ ActorKit extends NSObject to allow all objects to become actors. An actor has an
 
 example:
 
-	// look ma, no state machine or callbacks
+	// look ma, no state machine or callbacks - these spawn threads and return immediately
 	
-	Future *f1 = [[NSURL URLWithString:@"http://yahoo.com"] futurePerformSelector:@selector(fetch:) withObject:nil];
-	Future *f2 = [[NSURL URLWithString:@"http://google.com"] futurePerformSelector:@selector(fetch:) withObject:nil];
+	NSURL *future1 = [[NSURL URLWithString:@"http://yahoo.com"] asActor];
+	NSURL *future2 = [[NSURL URLWithString:@"http://google.com"] asActor];
 	
-	NSLog(@"request 1 returned %i bytes", (int)[(NSData *)[f1 result] length]);
-	NSLog(@"request 2 returned %i bytes", (int)[(NSData *)[f2 result] length]);
+	// now when we try to access the values, they block if the values aren't ready
+	
+	NSLog(@"request 1 returned %i bytes", (int)[future1 length]); 
+	NSLog(@"request 2 returned %i bytes", (int)[future2 length]);
 
 
 note:
