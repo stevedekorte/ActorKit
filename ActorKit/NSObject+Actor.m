@@ -33,6 +33,7 @@
 	return (Future *)objc_getAssociatedObject(self, "firstFuture");
 }
 
+
 - (void)setActorThread:(NSThread *)aThread
 {
 	objc_setAssociatedObject(self, "actorThread", aThread, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
