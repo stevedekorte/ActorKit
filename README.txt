@@ -24,3 +24,7 @@ note:
 	@implementation NSURL (fetch)
 	- (NSData *)fetch:sender { return [NSData dataWithContentsOfURL:self]; }
 	@end
+
+credits:
+
+	Thanks to Mark Papadakis for help with figuring out how to properly use mutex conditions.
