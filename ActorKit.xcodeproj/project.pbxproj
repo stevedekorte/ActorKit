@@ -110,10 +110,10 @@
 				AA2FB4A1141F533C00E57E01 /* FutureProxy.m */,
 				AAD0098F141F0ED200566C36 /* Mutex.h */,
 				AAD00990141F0ED200566C36 /* Mutex.m */,
-				AA9A97861419785000A2994E /* NSThread+Actor.h */,
-				AA9A97871419785000A2994E /* NSThread+Actor.m */,
 				AA2FB4A7141F5EB700E57E01 /* NSObject+Actor.h */,
 				AA2FB4A8141F5EB700E57E01 /* NSObject+Actor.m */,
+				AA9A97861419785000A2994E /* NSThread+Actor.h */,
+				AA9A97871419785000A2994E /* NSThread+Actor.m */,
 				AABB5D9F140E0C220020BA06 /* Supporting Files */,
 			);
 			path = ActorKit;

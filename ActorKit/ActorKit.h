@@ -8,5 +8,6 @@
 
 #import "ActorProxy.h"
 #import "FutureProxy.h"
-#import "NSThread+Actor.h"
+#import "Mutex.h"
 #import "NSObject+Actor.h"
+#import "NSThread+Actor.h"
