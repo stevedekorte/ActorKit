@@ -7,7 +7,12 @@
 //
 
 #import "ActorProxy.h"
+#import "NSObject+Actor.h"
+
+// private
+
+/*
 #import "FutureProxy.h"
 #import "Mutex.h"
-#import "NSObject+Actor.h"
 #import "NSThread+Actor.h"
+*/

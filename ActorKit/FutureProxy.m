@@ -12,13 +12,13 @@
 
 @implementation FutureProxy
 
-@synthesize lock;
-@synthesize actor;
+@synthesize futureActor;
 @synthesize futureInvocation;
-@synthesize value;
+@synthesize futureValue;
 @synthesize nextFuture;
-@synthesize waitingThreads;
-@synthesize exception;
+@synthesize futureWaitingThreads;
+@synthesize futureException;
+@synthesize futureLock;
 
 - (id)init
 {
@@ -27,8 +27,8 @@
 	if (self) 
 	{
 		done = NO;
-		[self setLock:[[[Mutex alloc] init] autorelease]];
-		[self setWaitingThreads:[NSMutableSet set]];
+		[self setFutureLock:[[[Mutex alloc] init] autorelease]];
+		[self setFutureWaitingThreads:[NSMutableSet set]];
     }
     
     return self;
@@ -36,13 +36,13 @@
 
 - (void)dealloc
 {
-	[self setActor:nil];
+	[self setFutureActor:nil];
 	[self setFutureInvocation:nil];
-	[self setValue:nil];
+	[self setFutureValue:nil];
 	[self setNextFuture:nil];
-	[self setWaitingThreads:nil];
-	[self setException:nil];
-	[self setLock:nil];
+	[self setFutureWaitingThreads:nil];
+	[self setFutureException:nil];
+	[self setFutureLock:nil];
 	[super dealloc];
 }
 
@@ -61,7 +61,7 @@
 - (void)futureShowSend
 {
 	NSLog(@"FutureProxy send [%@ %@]\n", 
-		   [[actor actorTarget] className], 
+		   [[futureActor actorTarget] className], 
 		   NSStringFromSelector([futureInvocation selector]));
 }
 
@@ -70,7 +70,7 @@
 	@try 
 	{
 		//[self futureShowSend];
-		[futureInvocation invokeWithTarget:[actor actorTarget]];
+		[futureInvocation invokeWithTarget:[futureActor actorTarget]];
 
 		id r;
 		[futureInvocation getReturnValue:(void *)&r];
@@ -78,18 +78,17 @@
 	}
 	@catch (NSException *e) 
 	{
-		printf("exception\n");
-		[self setException:e];
+		[self setFutureException:e];
 		[self setFutureResult:nil];
 	}
 	
-	for(NSThread *waitingThread in waitingThreads)
+	for(NSThread *waitingThread in futureWaitingThreads)
 	{
 		[waitingThread setWaitingOnFuture:nil];
 	}
 	
-	[waitingThreads removeAllObjects];
-	[lock resumeThread];
+	[futureWaitingThreads removeAllObjects];
+	[futureLock resumeThread];
 }
 
 - (void)setFutureResult:(id)anObject
@@ -101,14 +100,14 @@
 	
 	done = YES;
 
-	[self setValue:anObject];
+	[self setFutureValue:anObject];
 }
 
 - (BOOL)isWaitingOnCurrentThread
 {
 	// the recursion should avoid loop since the deadlock detection prevents loops
 	
-	for(NSThread *waitingThread in waitingThreads)
+	for(NSThread *waitingThread in futureWaitingThreads)
 	{		
 		if([[waitingThread waitingOnFuture] isWaitingOnCurrentThread]) 
 		{
@@ -123,10 +122,10 @@
 {
 	if(done) 
 	{
-		return value;
+		return futureValue;
 	}
 
-	[waitingThreads addObject:[NSThread currentThread]];
+	[futureWaitingThreads addObject:[NSThread currentThread]];
 
 	if([self isWaitingOnCurrentThread]) 
 	{
@@ -134,18 +133,22 @@
 		return nil;
 	}
 	
-	[lock pauseThread];
+	[futureLock pauseThread];
 			
-	if(exception)
+	if(futureException)
 	{
 		// guessing we have to wrap the exception so the stack info of original will be available
+		NSMutableDictionary *info = [NSMutableDictionary dictionary];
+		[info setObject:futureException forKey:@"exception"];
+		[info setObject:self forKey:@"future"];
+		
 		NSException *e = [[NSException alloc] initWithName:@"Future" 
 													reason:@"exception during send" 
-												  userInfo:[NSDictionary dictionaryWithObject:self forKey:@"future"]];
+												  userInfo:info];
 		[e raise];
 	}
 	
-	return value;
+	return futureValue;
 }
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation

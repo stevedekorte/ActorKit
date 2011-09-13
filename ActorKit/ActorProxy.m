@@ -12,7 +12,7 @@
 @implementation ActorProxy
 
 @synthesize actorTarget;
-@synthesize mutex;
+@synthesize actorMutex;
 @synthesize firstFuture;
 @synthesize actorThread;
 
@@ -28,7 +28,7 @@
 		
 	if(!thread)
 	{
-		[self setMutex:[[[Mutex alloc] init] autorelease]];
+		[self setActorMutex:[[[Mutex alloc] init] autorelease]];
 		thread = [[[NSThread alloc] initWithTarget:self selector:@selector(actorRunLoop:) object:nil] autorelease];
 		[self setActorThread:thread];
 		[thread setName:[NSString stringWithFormat:@"%@", [actorTarget className]]];
@@ -36,7 +36,7 @@
 	}
 	else
 	{
-		[[self mutex] resumeThread];
+		[actorMutex resumeThread];
 	}
 	
 	return thread;
@@ -62,7 +62,7 @@
 
 	FutureProxy *future = [[[FutureProxy alloc] init] autorelease];
 
-	[future setActor:self];
+	[future setFutureActor:self];
 	[future setFutureInvocation:anInvocation];
 	[anInvocation retainArguments];
 	
@@ -105,12 +105,13 @@
 		
 		[pool release];
 		
-		[[self mutex] pauseThread];
+		[actorMutex pauseThread];
 	}
 	
 	// do these here so they aren't freed before the thread is done
 	[self setFirstFuture:nil];	
 	[self setActorThread:nil];
+	[self setActorMutex:nil];
 }
 
 - (BOOL)respondsToSelector:(SEL)aSelector

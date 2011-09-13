@@ -12,14 +12,16 @@
 
 @interface ActorProxy : NSProxy
 {
+	// using the "actor" prefix to avoid name conflict with proxied object
+	
 	id actorTarget;
-	Mutex *mutex;
+	Mutex *actorMutex;
 	FutureProxy *firstFuture;
 	NSThread *actorThread;
 }
 
 @property (retain, atomic) id actorTarget;
-@property (retain, atomic) Mutex *mutex;
+@property (retain, atomic) Mutex *actorMutex;
 @property (retain, atomic) FutureProxy *firstFuture;
 @property (retain, atomic) NSThread *actorThread;
 

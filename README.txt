@@ -14,7 +14,7 @@ About:
 
 Example:
 
-	// these spawn threads to and return immediately
+	// these spawn threads for each actor to and return immediately
 	
 	NSData *future1 = [(NSURL *)[[NSURL URLWithString:@"http://yahoo.com"] asActor] fetch];
 	NSData *future2 = [(NSURL *)[[NSURL URLWithString:@"http://google.com"] asActor] fetch];
@@ -27,16 +27,23 @@ Example:
 	// We just did a safe, coordinated interaction between three threads 
 	// by only adding two tokens and with no state machines or callbacks
 
-
-Notes:
-
 	// you'll need to add this method for the above example because 
 	// dataWithContentsOfURL: is a class method but actors have to be instances
  
 	@implementation NSURL (fetch)
 	- (NSData *)fetch:sender { return [NSData dataWithContentsOfURL:self]; }
 	@end
+	
+	
+Notes:
 
+	It's ok for multiple threads to look at the same future. 
+	Each will block until the future is ready.
+	  
+	All blocks are done by pausing/resuming the requesting thread.
+	ActorKit does no busy waits.
+	
+	
 
 Credits:
 
