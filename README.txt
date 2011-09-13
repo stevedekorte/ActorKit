@@ -22,7 +22,7 @@ Example:
 	NSLog(@"request 1 returned %i bytes", (int)[future1 length]); 
 	NSLog(@"request 2 returned %i bytes", (int)[future2 length]);
 
-	// We just did a coordinated interaction between three threads without 
+	// We just did a coordinated interaction between three threads 
 	// by only adding two tokens.
 
 Notes:
