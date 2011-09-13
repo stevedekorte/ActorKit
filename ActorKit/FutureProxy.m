@@ -22,7 +22,7 @@
 
 - (id)init
 {
-    //self = [super init];
+    //self = [super init]; // NSProxy doesn't implement init
     
 	if (self) 
 	{
@@ -69,9 +69,10 @@
 {
 	@try 
 	{
-		id r;
 		//[self futureShowSend];
 		[futureInvocation invokeWithTarget:[actor actorTarget]];
+
+		id r;
 		[futureInvocation getReturnValue:(void *)&r];
 		[self setFutureResult:r];
 	}
@@ -105,7 +106,7 @@
 
 - (BOOL)isWaitingOnCurrentThread
 {
-	// thie recursion should avoid loop since the deadlock detection prevents loops
+	// the recursion should avoid loop since the deadlock detection prevents loops
 	
 	for(NSThread *waitingThread in waitingThreads)
 	{		
@@ -149,8 +150,7 @@
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation
 {
-	id r = [self futureResult];
-	[anInvocation invokeWithTarget:r];
+	[anInvocation invokeWithTarget:[self futureResult]];
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector

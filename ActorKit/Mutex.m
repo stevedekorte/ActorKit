@@ -37,45 +37,27 @@
 	[super dealloc];
 }
 
-/*
-- (void)lock
-{
-    pthread_mutex_lock(&mutex);
-}
-
-- (void)unlock
-{
-    pthread_mutex_unlock(&mutex);
-}
-
-- (BOOL)tryLock
-{
-    return pthread_mutex_trylock(&mutex) == 0; // 0 means we got the lock
-}
-*/
-
 - (BOOL)isPaused
 {
 	return isPaused;
 }
 
 - (void)pauseThread
-{
-	//printf("%p pauseThread\n", (void *)[NSThread currentThread]);
-	
+{	
 	isPaused = YES;
+	
 	pthread_mutex_lock(&mutex);
+	
 	while (isPaused) 
 	{
 		pthread_cond_wait( &condition, &mutex);
 	}
+	
 	pthread_mutex_unlock(&mutex);
 }
 
 - (void)resumeThread
-{
-	//printf("%p resumeThread\n", (void *)[NSThread currentThread]);
-	
+{	
 	if(isPaused)
 	{
 		isPaused = NO;	

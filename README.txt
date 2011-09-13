@@ -11,7 +11,6 @@ About:
 
 Example:
 
-	// look ma, no state machines or callbacks
 	// these spawn threads to and return immediately
 	
 	NSData *future1 = [(NSURL *)[[NSURL URLWithString:@"http://yahoo.com"] asActor] fetch];
@@ -23,7 +22,7 @@ Example:
 	NSLog(@"request 2 returned %i bytes", (int)[future2 length]);
 
 	// We just did a coordinated interaction between three threads 
-	// by only adding two tokens.
+	// by only adding two tokens and with no state machines or callbacks
 
 Notes:
 

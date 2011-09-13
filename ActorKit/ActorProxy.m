@@ -18,6 +18,7 @@
 
 - init
 {
+    //self = [super init]; // NSProxy doesn't implement init
 	return self;
 }
 
@@ -51,8 +52,6 @@
 		[[self actorThread] cancel];
 	}
 	
-	[self setFirstFuture:nil];	
-	[self setActorThread:nil];
 	[super dealloc];
 }
 
@@ -93,7 +92,7 @@
 	
 	while(![[NSThread currentThread] isCancelled])
 	{	
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // Top-level pool
+		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 		
 		while([self firstFuture])
 		{
@@ -108,6 +107,10 @@
 		
 		[[self mutex] pauseThread];
 	}
+	
+	// do these here so they aren't freed before the thread is done
+	[self setFirstFuture:nil];	
+	[self setActorThread:nil];
 }
 
 - (BOOL)respondsToSelector:(SEL)aSelector
@@ -119,7 +122,9 @@
 {
 	if([[anInvocation methodSignature] methodReturnType][0] != '@')
 	{
-		[NSException raise:@"ActorProxy" format:[NSString stringWithFormat:@"'%@' only methods that return objects are supported", NSStringFromSelector([anInvocation selector])]];
+		[NSException raise:@"ActorProxy" format:
+		 [NSString stringWithFormat:@"sent '%@' but only methods that return objects are supported", 
+		  NSStringFromSelector([anInvocation selector])]];
 	}
 	
 	FutureProxy *f = [self futurePerformInvocation:anInvocation];
