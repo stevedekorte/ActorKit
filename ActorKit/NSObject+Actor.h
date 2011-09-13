@@ -6,14 +6,13 @@
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
-#import "Coroutine.h"
 #import "Future.h"
 
 @interface NSObject (NSObject_Actor)
 
 // private
 
-- (void)actorRunLoop;
+- (void)actorRunLoop:sender;
 
 // public
 

@@ -7,18 +7,20 @@
 //
 
 #import "Future.h"
-#import "Coroutine.h"
+#import "NSThread+Actor.h"
 
 @implementation Future
 
+@synthesize lock;
 @synthesize actor;
 @synthesize selector;
 @synthesize argument;
 @synthesize value;
 @synthesize nextFuture;
-@synthesize waitingCoroutines;
+@synthesize waitingThreads;
 @synthesize exception;
 @synthesize error;
+@synthesize delegate;
 
 - (id)init
 {
@@ -26,8 +28,9 @@
     
 	if (self) 
 	{
-		[self setWaitingCoroutines:[NSMutableSet set]];
-        // Initialization code here.
+		done = NO;
+		[self setLock:[[[Mutex alloc] init] autorelease]];
+		[self setWaitingThreads:[NSMutableSet set]];
     }
     
     return self;
@@ -39,9 +42,11 @@
 	[self setArgument:nil];
 	[self setValue:nil];
 	[self setNextFuture:nil];
-	[self setWaitingCoroutines:nil];
+	[self setWaitingThreads:nil];
 	[self setException:nil];
 	[self setError:nil];
+	[self setDelegate:nil];
+	[self setLock:nil];
 	[super dealloc];
 }
 
@@ -61,41 +66,55 @@
 {
 	@try 
 	{
-		printf("Future send [%s %s %s]\n", 
+		/*
+		printf("Future send [%s %s%s]\n", 
 			   [[actor className] UTF8String], 
 			   [NSStringFromSelector(selector) UTF8String], 
 			   [[argument className] UTF8String]);
+		*/
 		id r = [actor performSelector:selector withObject:argument];
 		[self setResult:r];
 	}
 	@catch (NSException *e) 
 	{
+		printf("exception\n");
 		[self setException:e];
 		[self setResult:nil];
 	}
+	
+	for(NSThread *waitingThread in waitingThreads)
+	{
+		[waitingThread setWaitingOnFuture:nil];
+	}
+	
+	[waitingThreads removeAllObjects];
+	[lock resumeThread];
 }
 
 - (void)setResult:(id)anObject
 {
-	[self setValue:anObject];
-	done = YES;
-	
-	for(Coroutine *waitingCoroutine in waitingCoroutines)
-	{
-		[waitingCoroutine setWaitingOnFuture:nil];
-		[waitingCoroutine scheduleLast];
+	if(done) 
+	{	
+		return;
 	}
 	
-	[waitingCoroutines removeAllObjects];
+	done = YES;
+
+	[self setValue:anObject];
+	
+	if (delegate && action) 
+	{
+		[delagate performSelector:action withObject:self];
+	}
 }
 
-- (BOOL)isWaitingOnCurrentCoroutine
+- (BOOL)isWaitingOnCurrentThread
 {
-	// recursion should void loop since the deadlock detection prevents loops
+	// thie recursion should avoid loop since the deadlock detection prevents loops
 	
-	for(Coroutine *waitingCoroutine in waitingCoroutines)
+	for(NSThread *waitingThread in waitingThreads)
 	{		
-		if([[waitingCoroutine waitingOnFuture] isWaitingOnCurrentCoroutine]) 
+		if([[waitingThread waitingOnFuture] isWaitingOnCurrentThread]) 
 		{
 			return YES;
 		}
@@ -110,23 +129,17 @@
 	{
 		return value;
 	}
-	
-	while([self isWaitingOnCurrentCoroutine]) // loop in case exception is resumed 
+
+	[waitingThreads addObject:[NSThread currentThread]];
+
+	if([self isWaitingOnCurrentThread]) 
 	{
 		[NSException raise:@"Future" format:@"waiting for result on this coroutine would cause a deadlock"];
+		return nil;
 	}
 	
-	[waitingCoroutines addObject:[Coroutine currentCoroutine]];
-	[[Coroutine currentCoroutine] setWaitingOnFuture:self];
-	
-	[[Coroutine currentCoroutine] unschedule];
-	
-	while(!done) // loop in case exception is resumed 
-	{
-		[NSException raise:@"Future" format:@"attempt to resume coroutine waiting on future before result is ready"];
-		[[Coroutine currentCoroutine] unschedule];
-	}
-	
+	[lock pauseThread];
+			
 	if(exception)
 	{
 		// guessing we have to wrap the exception so the stack info of original will be available

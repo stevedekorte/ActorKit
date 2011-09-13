@@ -7,12 +7,21 @@
 //
 
 #import "NSObject+Actor.h"
+#import "NSThread+Actor.h"
 #import <objc/runtime.h>
-
 
 @implementation NSObject (NSObject_Actor)
 
-static long activeActorCount = 0;
+- (void)setMutex:(Mutex *)aMutex
+{
+	objc_setAssociatedObject(self, "mutex", aMutex, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (Mutex *)mutex
+{
+	return (Mutex *)objc_getAssociatedObject(self, "mutex");
+}
+
 
 - (void)setFirstFuture:(Future *)aFuture
 {
@@ -24,35 +33,51 @@ static long activeActorCount = 0;
 	return (Future *)objc_getAssociatedObject(self, "firstFuture");
 }
 
-- (void)setActorCoroutine:(Coroutine *)aCoroutine
+- (void)setActorThread:(NSThread *)aThread
 {
-	objc_setAssociatedObject(self, "actorCoroutine", aCoroutine, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+	objc_setAssociatedObject(self, "actorThread", aThread, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (Coroutine *)actorCoroutine
+- (NSThread *)actorThread
+{	
+	return (NSThread *)objc_getAssociatedObject(self, "actorThread");;
+}
+
+- (NSThread *)actorThreadCreateOrResumeIfNeeded
 {
-	Coroutine *c = (Coroutine *)objc_getAssociatedObject(self, "actorCoroutine");
-	
-	if(!c)
+	NSThread *thread = [self actorThread];
+		
+	if(!thread)
 	{
-		c = [[[Coroutine alloc] init] autorelease];
-		[c setTarget:self];
-		[c setAction:@selector(actorRunLoop)];
-		[self setActorCoroutine:c];
-		[c setName:[NSString stringWithFormat:@"%@", [self className]]];
+		[self setMutex:[[[Mutex alloc] init] autorelease]];
+		thread = [[[NSThread alloc] initWithTarget:self selector:@selector(actorRunLoop:) object:nil] autorelease];
+		[self setActorThread:thread];
+		[thread setName:[NSString stringWithFormat:@"%@", [self className]]];
+		[thread start];
+	}
+	else
+	{
+		[[self mutex] resumeThread];
 	}
 	
-	return c;
+	return thread;
 }
+
+// still need to implement dealloc
 
 /*
 - (void)dealloc
 {
-	// coros retain the Future's they are waiting on, which retains the actor
+	// threads retain the Future's they are waiting on, which retains the actor
 	// so dealloc should only occur when it's safe of dependencies 
-	[self setFirstFuture:nil];
-	[self setCoroutine:nil];
-	[super dealloc];
+
+	if([self actorThread])
+	{
+		[[self actorThread] cancel];
+	}
+	
+	[self setFirstFuture:nil];	
+	[self setActorThread:nil];
 }
 */
 
@@ -60,14 +85,6 @@ static long activeActorCount = 0;
 {
 	Future *future = [[[Future alloc] init] autorelease];
 	
-	if([self firstFuture])
-	{
-		[[self firstFuture] append:future];
-	}
-	else
-	{
-		[self setFirstFuture:future];
-	}
 	
 	return future;
 }
@@ -79,37 +96,55 @@ static long activeActorCount = 0;
 
 - (Future *)futurePerformSelector:(SEL)selector withObject:anObject
 {
+	NSLock *lock = [[self actorThread] lock];
+	[lock lock];
+
 	Future *future = [self newFuture];
 
 	[future setActor:self];
 	[future setSelector:selector];
 	[future setArgument:anObject];
-	[[self actorCoroutine] scheduleLast];
+	
+	if([self firstFuture])
+	{
+		[[self firstFuture] append:future];
+	}
+	else
+	{
+		[self setFirstFuture:future];
+	}
+	
+	[self actorThreadCreateOrResumeIfNeeded];
+	[lock unlock];
 	
 	return future;
 }
 
-- (void)actorRunLoop
+- (void)actorRunLoop:sender
 {
-	while(YES) // coroutines never return, they are only unscheduled
+	NSLock *lock = [[self actorThread] lock];
+
+	if([NSThread currentThread] != [self actorThread])
+	{
+		[NSException raise:@"Actor" format:@"attempt to start actor loop from another thread"];
+	}
+	
+	while(![[NSThread currentThread] isCancelled])
 	{	
-		activeActorCount ++;
-		
-		if([Coroutine currentCoroutine] != [self actorCoroutine])
-		{
-			[NSException raise:@"Actor" format:@"actorRunLoop not running from actor coroutine!"];
-		}
+		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // Top-level pool
 		
 		while([self firstFuture])
 		{
 			Future *f = [self firstFuture];
 			[f send]; // exceptions are caught within the send method
+			[lock lock];
 			[self setFirstFuture:[f nextFuture]];
-			[[self actorCoroutine] yield];
+			[lock unlock];
 		}
 		
-		activeActorCount --;
-		[[self actorCoroutine] unschedule];
+		[pool release];
+		
+		[[self mutex] pauseThread];
 	}
 }
 
