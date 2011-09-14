@@ -12,6 +12,7 @@ About:
 	Futures detect and raise an exception in situations that would cause a deadlock.
 
 
+
 Example:
 
 	// these spawn threads for each actor to and return immediately
@@ -35,16 +36,26 @@ Example:
 	@end
 	
 	
+	
 Notes:
 
+	Exceptions that occur while an actor processes a message will be
+	passed to the future and raised in all the threads that attempt to access the future.
+	
 	It's ok for multiple threads to look at the same future. 
 	Each will block until the future is ready.
 	  
-	All blocks are done by pausing/resuming the requesting thread.
+	All blocking is done by pausing/resuming the requesting thread.
 	ActorKit does no busy waits.
+	
+	When an actor finishes processing it's message queue, it's thread
+	is paused until a new message is added to the queue.
 	
 	
 
 Credits:
 
 	Thanks to Mark Papadakis for help with figuring out how to properly use mutex conditions.
+	
+	
+	
