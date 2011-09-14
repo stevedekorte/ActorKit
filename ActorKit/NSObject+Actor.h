@@ -7,9 +7,11 @@
 //
 
 #import "ActorProxy.h"
+#import "SyncProxy.h"
 
 @interface NSObject (NSObject_Actor)
 
-- (ActorProxy *)asActor;
+- asActor;
+- asSynchronous;
 
 @end

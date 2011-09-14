@@ -15,6 +15,8 @@
 		AA2FB4A9141F5EB700E57E01 /* NSObject+Actor.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2FB4A7141F5EB700E57E01 /* NSObject+Actor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA2FB4AA141F5EB700E57E01 /* NSObject+Actor.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2FB4A8141F5EB700E57E01 /* NSObject+Actor.m */; };
 		AA2FB4AC141FF34200E57E01 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA2FB4AB141FF34200E57E01 /* README.txt */; };
+		AA300E071420649100A63289 /* SyncProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = AA300E051420649100A63289 /* SyncProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA300E081420649100A63289 /* SyncProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA300E061420649100A63289 /* SyncProxy.m */; };
 		AA9A97881419785000A2994E /* NSThread+Actor.h in Headers */ = {isa = PBXBuildFile; fileRef = AA9A97861419785000A2994E /* NSThread+Actor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA9A97891419785000A2994E /* NSThread+Actor.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9A97871419785000A2994E /* NSThread+Actor.m */; };
 		AABB5D99140E0C220020BA06 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AABB5D98140E0C220020BA06 /* Cocoa.framework */; };
@@ -33,6 +35,8 @@
 		AA2FB4A7141F5EB700E57E01 /* NSObject+Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Actor.h"; sourceTree = "<group>"; };
 		AA2FB4A8141F5EB700E57E01 /* NSObject+Actor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Actor.m"; sourceTree = "<group>"; };
 		AA2FB4AB141FF34200E57E01 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = SOURCE_ROOT; };
+		AA300E051420649100A63289 /* SyncProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncProxy.h; sourceTree = "<group>"; };
+		AA300E061420649100A63289 /* SyncProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncProxy.m; sourceTree = "<group>"; };
 		AA9A97861419785000A2994E /* NSThread+Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSThread+Actor.h"; sourceTree = "<group>"; };
 		AA9A97871419785000A2994E /* NSThread+Actor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSThread+Actor.m"; sourceTree = "<group>"; };
 		AABB5D95140E0C220020BA06 /* ActorKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ActorKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +118,8 @@
 				AA2FB4A8141F5EB700E57E01 /* NSObject+Actor.m */,
 				AA9A97861419785000A2994E /* NSThread+Actor.h */,
 				AA9A97871419785000A2994E /* NSThread+Actor.m */,
+				AA300E051420649100A63289 /* SyncProxy.h */,
+				AA300E061420649100A63289 /* SyncProxy.m */,
 				AABB5D9F140E0C220020BA06 /* Supporting Files */,
 			);
 			path = ActorKit;
@@ -139,11 +145,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA2726621411886500FE0A43 /* ActorKit.h in Headers */,
-				AA9A97881419785000A2994E /* NSThread+Actor.h in Headers */,
 				AAD00991141F0ED200566C36 /* Mutex.h in Headers */,
 				AA2FB4A2141F533C00E57E01 /* ActorProxy.h in Headers */,
 				AA2FB4A4141F533C00E57E01 /* FutureProxy.h in Headers */,
 				AA2FB4A9141F5EB700E57E01 /* NSObject+Actor.h in Headers */,
+				AA9A97881419785000A2994E /* NSThread+Actor.h in Headers */,
+				AA300E071420649100A63289 /* SyncProxy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +220,7 @@
 				AA2FB4A3141F533C00E57E01 /* ActorProxy.m in Sources */,
 				AA2FB4A5141F533C00E57E01 /* FutureProxy.m in Sources */,
 				AA2FB4AA141F5EB700E57E01 /* NSObject+Actor.m in Sources */,
+				AA300E081420649100A63289 /* SyncProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -64,6 +64,26 @@ Notes:
 	actor is returned for multiple calls of asActor on the same instance.
 	
 	
+	
+SyncProxy
+
+	As an extra feature, NSObject is also extended to have a asSynchronous method.
+	Calling it will return a proxy to the object which will ensure that only one thread
+	can message the object at a time. This allows any Objective-C class to be used
+	in a thread safe way. This does no checks for deadlocks and may not be optimal 
+	in performance, but it is an convenient way to get object level thread safety.
+	
+	
+Example:
+
+	// just call asSynchronous to get the proxy
+	
+	NSMutableDictionary *dict = [[NSMutableDictionary dictionary] asSynchronous];
+	
+	// now message sends from all threads to dict will be locked such that only one 
+	// thread can access it at a time. Again, this does not use busy waits.
+	
+	
 
 Credits:
 

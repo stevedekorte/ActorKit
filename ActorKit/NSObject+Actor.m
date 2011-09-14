@@ -11,9 +11,9 @@
 
 @implementation NSObject (NSObject_Actor)
 
-static char *actorKey = "actor";
+static char *actorKey = "ActorProxy";
 
-- (ActorProxy *)asActor
+- asActor
 {
 	ActorProxy *actor = objc_getAssociatedObject(self, actorKey);
 
@@ -24,8 +24,23 @@ static char *actorKey = "actor";
 		objc_setAssociatedObject(self, actorKey, actor, OBJC_ASSOCIATION_ASSIGN);
 	}
 	
-	return actor;	
+	return (id)actor;	
 }
 
+static char *synchoronousKey = "SyncProxy";
+
+- asSynchronous
+{
+	SyncProxy *sp = objc_getAssociatedObject(self, synchoronousKey);
+	
+	if(!sp)
+	{
+		sp = [[[SyncProxy alloc] init] autorelease];
+		[sp setSyncProxyTarget:self];
+		objc_setAssociatedObject(self, synchoronousKey, sp, OBJC_ASSOCIATION_ASSIGN);
+	}
+	
+	return (id)sp;	
+}
 
 @end
