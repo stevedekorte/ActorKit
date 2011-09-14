@@ -154,7 +154,7 @@
 	[futureWaitingThreads addObject:[NSThread currentThread]];
 	[self futureRaiseExceptionIfDeadlock];
 	[futureLock pauseThread];
-	[self futurePassExceptionIfNeeded];
+	[self futureRaiseExceptionIfDeadlock];
 	
 	return futureValue;
 }
