@@ -118,23 +118,8 @@
 	return NO;
 }
 
-- futureResult
+- (void)futurePassExceptionIfNeeded
 {
-	if(done) 
-	{
-		return futureValue;
-	}
-
-	[futureWaitingThreads addObject:[NSThread currentThread]];
-
-	if([self isWaitingOnCurrentThread]) 
-	{
-		[NSException raise:@"Future" format:@"waiting for result on this coroutine would cause a deadlock"];
-		return nil;
-	}
-	
-	[futureLock pauseThread];
-			
 	if(futureException)
 	{
 		// guessing we have to wrap the exception so the stack info of original will be available
@@ -147,9 +132,33 @@
 												  userInfo:info];
 		[e raise];
 	}
+}
+
+- (void)futureRaiseExceptionIfDeadlock
+{
+	if([self isWaitingOnCurrentThread]) 
+	{
+		[NSException raise:@"Future" format:@"waiting for result on this coroutine would cause a deadlock"];
+	}
+
+}
+
+- futureResult
+{	
+	if(done) 
+	{
+		[self futurePassExceptionIfNeeded];
+		return futureValue;
+	}
+
+	[futureWaitingThreads addObject:[NSThread currentThread]];
+	[self futureRaiseExceptionIfDeadlock];
+	[futureLock pauseThread];
+	[self futurePassExceptionIfNeeded];
 	
 	return futureValue;
 }
+
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation
 {
