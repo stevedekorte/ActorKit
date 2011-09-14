@@ -140,7 +140,6 @@
 	{
 		[NSException raise:@"Future" format:@"waiting for result on this coroutine would cause a deadlock"];
 	}
-
 }
 
 - futureResult

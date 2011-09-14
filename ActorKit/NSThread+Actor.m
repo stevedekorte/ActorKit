@@ -48,7 +48,7 @@
 {
 	Mutex *lock = [[self threadDictionary] objectForKey:@"lock"];
 	
-	if (!lock)
+	if (lock == nil)
 	{
 		lock = [[[NSLock alloc] init] autorelease];
 		[self setLock:lock];

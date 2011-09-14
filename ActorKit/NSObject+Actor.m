@@ -7,15 +7,24 @@
 //
 
 #import "NSObject+Actor.h"
-//#import <objc/runtime.h>
+#import <objc/runtime.h>
 
 @implementation NSObject (NSObject_Actor)
 
+static char *actorKey = "actor";
+
 - (ActorProxy *)asActor
 {
-	ActorProxy *ap = [[[ActorProxy alloc] init] autorelease];
-	[ap setActorTarget:self];
-	return ap;
+	ActorProxy *actor = objc_getAssociatedObject(self, actorKey);
+
+	if(!actor)
+	{
+		actor = [[[ActorProxy alloc] init] autorelease];
+		[actor setActorTarget:self];
+		objc_setAssociatedObject(self, actorKey, actor, OBJC_ASSOCIATION_ASSIGN);
+	}
+	
+	return actor;	
 }
 
 

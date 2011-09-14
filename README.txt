@@ -1,27 +1,36 @@
 
+
 About:
 
-	ActorKit allows any object to become an actor. 
+	ActorKit is a framework supporting multithreaded actors with transparent futures in Objective-C.
 
-	Each actor has an os thread and a queue of incoming messages which it processes in 
-	first-in-first-out order.
+	Sending an "asActor" message to any object returns an actor proxy for the object.
 
-	Any message to an actor returns a "future" object which is a proxy for the result
-	and only blocks when it is accessed if the result isn't ready.
+	Each actor spawns an os thread to process it's queue of messages. 
 	
-	Futures detect and raise an exception in situations that would cause a deadlock.
+	Sending messages to the actor will queue them to be processed in first-in-first-out order 
+	by the actor's thread and immediately returns a "future" object.
+	
+	A future is a proxy for the result. If it is accessed before the result is ready, it
+	pauses any calling threads until it is ready. After it is ready, it acts as a transparent
+	proxy for the result, passing messages to the result as if the future were the same object.
+		
+	Futures detect and raise an exception in situations where pausing the calling thread 
+	would cause a deadlock.
 
 
 
 Example:
 
 	// these spawn threads for each actor to and return immediately
-	
+
 	NSData *future1 = [(NSURL *)[[NSURL URLWithString:@"http://yahoo.com"] asActor] fetch];
 	NSData *future2 = [(NSURL *)[[NSURL URLWithString:@"http://google.com"] asActor] fetch];
+
+	// ... do stuff that doesn't need to wait on the results ...
 	
 	// now when we try to access the values, they block if the values aren't ready
-	
+
 	NSLog(@"request 1 returned %i bytes", (int)[future1 length]); 
 	NSLog(@"request 2 returned %i bytes", (int)[future2 length]);
 
@@ -51,11 +60,14 @@ Notes:
 	When an actor finishes processing it's message queue, it's thread
 	is paused until a new message is added to the queue.
 	
+	Objects store their actor proxies as an associated object so the same 
+	actor is returned for multiple calls of asActor on the same instance.
+	
 	
 
 Credits:
 
-	Thanks to Mark Papadakis for help with figuring out how to properly use mutex conditions.
+	Thanks to Mark Papadakis for help me figure out how to properly use mutex conditions.
 	
 	
 	

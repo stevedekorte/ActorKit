@@ -18,18 +18,18 @@
 	BOOL done;
 	NSMutableSet *futureWaitingThreads;
 	NSException *futureException;
-	Mutex *futureLock;
+	Mutex *futureLock; // used to pause any threads accessing future before it is done
 }
 
 // these are all private
 
-@property (assign, nonatomic) id futureActor;
-@property (retain, nonatomic) NSInvocation *futureInvocation;
-@property (retain, nonatomic) id futureValue;
-@property (retain, nonatomic) id nextFuture;
-@property (retain, nonatomic) NSMutableSet *futureWaitingThreads;
-@property (retain, nonatomic) NSException *futureException;
-@property (retain, nonatomic) Mutex *futureLock;
+@property (assign, atomic) id futureActor;
+@property (retain, atomic) NSInvocation *futureInvocation;
+@property (retain, atomic) id futureValue;
+@property (retain, atomic) id nextFuture;
+@property (retain, atomic) NSMutableSet *futureWaitingThreads;
+@property (retain, atomic) NSException *futureException;
+@property (retain, atomic) Mutex *futureLock;
 
 - (void)futureAppend:(FutureProxy *)aFuture;
 - (void)futureSend;

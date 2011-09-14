@@ -20,10 +20,11 @@
 	NSThread *actorThread;
 }
 
+// all private
+
 @property (retain, atomic) id actorTarget;
 @property (retain, atomic) Mutex *actorMutex;
 @property (retain, atomic) FutureProxy *firstFuture;
 @property (retain, atomic) NSThread *actorThread;
-
 
 @end
