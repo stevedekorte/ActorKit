@@ -19,6 +19,7 @@
 @synthesize futureWaitingThreads;
 @synthesize futureException;
 @synthesize futureLock;
+@synthesize futureQueueLimitMutex;
 
 - (id)init
 {
@@ -27,8 +28,9 @@
 	if (self) 
 	{
 		done = NO;
-		[self setFutureLock:[[[Mutex alloc] init] autorelease]];
 		[self setFutureWaitingThreads:[NSMutableSet set]];
+		[self setFutureLock:[[[Mutex alloc] init] autorelease]];
+		[self setFutureQueueLimitMutex:[[[Mutex alloc] init] autorelease]];
     }
     
     return self;
@@ -43,6 +45,7 @@
 	[self setFutureWaitingThreads:nil];
 	[self setFutureException:nil];
 	[self setFutureLock:nil];
+	[self setFutureQueueLimitMutex:nil];
 	[super dealloc];
 }
 
@@ -65,8 +68,15 @@
 		   NSStringFromSelector([futureInvocation selector]));
 }
 
+- (void)pauseThreadOnQueueLimitMutex
+{
+	[futureQueueLimitMutex pauseThread];
+}
+
 - (void)futureSend
 {
+	[futureQueueLimitMutex resumeAnyWaitingThreads];
+	
 	@try 
 	{
 		//[self futureShowSend];
@@ -88,7 +98,7 @@
 	}
 	
 	[futureWaitingThreads removeAllObjects];
-	[futureLock resumeThread];
+	[futureLock resumeAnyWaitingThreads];
 }
 
 - (void)setFutureResult:(id)anObject

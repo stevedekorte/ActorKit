@@ -19,6 +19,7 @@
 	NSMutableSet *futureWaitingThreads;
 	NSException *futureException;
 	Mutex *futureLock; // used to pause any threads accessing future before it is done
+	Mutex *futureQueueLimitMutex; // used to pause the thread sending the message if the actor q limit is reached
 }
 
 // these are all private
@@ -30,11 +31,14 @@
 @property (retain, atomic) NSMutableSet *futureWaitingThreads;
 @property (retain, atomic) NSException *futureException;
 @property (retain, atomic) Mutex *futureLock;
+@property (retain, atomic) Mutex *futureQueueLimitMutex;
 
 - (void)futureAppend:(FutureProxy *)aFuture;
 - (void)futureSend;
 
 - (void)setFutureResult:(id)anObject;
 - futureResult;
+
+- (void)pauseThreadOnQueueLimitMutex;
 
 @end

@@ -42,26 +42,25 @@
 	return isPaused;
 }
 
-- (void)pauseThread
+- (void)pauseThread // have do be carefull about pauses and resumes mixing...
 {	
-	isPaused = YES;
-	
 	pthread_mutex_lock(&mutex);
+	isPaused = YES;
 	
 	while (isPaused) 
 	{
-		pthread_cond_wait( &condition, &mutex);
+		pthread_cond_wait(&condition, &mutex);
 	}
 	
 	pthread_mutex_unlock(&mutex);
 }
 
-- (void)resumeThread
+- (void)resumeAnyWaitingThreads
 {	
 	if(isPaused)
 	{
-		isPaused = NO;	
 		pthread_mutex_lock(&mutex);
+		isPaused = NO;	
 		pthread_cond_broadcast(&condition);
 		pthread_mutex_unlock(&mutex);
 	}

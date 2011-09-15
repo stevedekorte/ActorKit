@@ -17,6 +17,12 @@
 		AA2FB4AC141FF34200E57E01 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = AA2FB4AB141FF34200E57E01 /* README.txt */; };
 		AA300E071420649100A63289 /* SyncProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = AA300E051420649100A63289 /* SyncProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA300E081420649100A63289 /* SyncProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA300E061420649100A63289 /* SyncProxy.m */; };
+		AA38C81B142162020081CA9C /* NSArray+Actor.h in Headers */ = {isa = PBXBuildFile; fileRef = AA38C819142162020081CA9C /* NSArray+Actor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA38C81C142162020081CA9C /* NSArray+Actor.m in Sources */ = {isa = PBXBuildFile; fileRef = AA38C81A142162020081CA9C /* NSArray+Actor.m */; };
+		AA38C820142163F60081CA9C /* BatchProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = AA38C81E142163F60081CA9C /* BatchProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA38C821142163F60081CA9C /* BatchProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA38C81F142163F60081CA9C /* BatchProxy.m */; };
+		AA38C824142178190081CA9C /* NSInvocation+Copy.h in Headers */ = {isa = PBXBuildFile; fileRef = AA38C822142178190081CA9C /* NSInvocation+Copy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA38C825142178190081CA9C /* NSInvocation+Copy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA38C823142178190081CA9C /* NSInvocation+Copy.m */; };
 		AA9A97881419785000A2994E /* NSThread+Actor.h in Headers */ = {isa = PBXBuildFile; fileRef = AA9A97861419785000A2994E /* NSThread+Actor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA9A97891419785000A2994E /* NSThread+Actor.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9A97871419785000A2994E /* NSThread+Actor.m */; };
 		AABB5D99140E0C220020BA06 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AABB5D98140E0C220020BA06 /* Cocoa.framework */; };
@@ -37,6 +43,12 @@
 		AA2FB4AB141FF34200E57E01 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = SOURCE_ROOT; };
 		AA300E051420649100A63289 /* SyncProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncProxy.h; sourceTree = "<group>"; };
 		AA300E061420649100A63289 /* SyncProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncProxy.m; sourceTree = "<group>"; };
+		AA38C819142162020081CA9C /* NSArray+Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Actor.h"; sourceTree = "<group>"; };
+		AA38C81A142162020081CA9C /* NSArray+Actor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Actor.m"; sourceTree = "<group>"; };
+		AA38C81E142163F60081CA9C /* BatchProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatchProxy.h; sourceTree = "<group>"; };
+		AA38C81F142163F60081CA9C /* BatchProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatchProxy.m; sourceTree = "<group>"; };
+		AA38C822142178190081CA9C /* NSInvocation+Copy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+Copy.h"; sourceTree = "<group>"; };
+		AA38C823142178190081CA9C /* NSInvocation+Copy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+Copy.m"; sourceTree = "<group>"; };
 		AA9A97861419785000A2994E /* NSThread+Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSThread+Actor.h"; sourceTree = "<group>"; };
 		AA9A97871419785000A2994E /* NSThread+Actor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSThread+Actor.m"; sourceTree = "<group>"; };
 		AABB5D95140E0C220020BA06 /* ActorKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ActorKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +119,12 @@
 		AABB5D9E140E0C220020BA06 /* ActorKit */ = {
 			isa = PBXGroup;
 			children = (
+				AA38C822142178190081CA9C /* NSInvocation+Copy.h */,
+				AA38C823142178190081CA9C /* NSInvocation+Copy.m */,
+				AA38C81E142163F60081CA9C /* BatchProxy.h */,
+				AA38C81F142163F60081CA9C /* BatchProxy.m */,
+				AA38C819142162020081CA9C /* NSArray+Actor.h */,
+				AA38C81A142162020081CA9C /* NSArray+Actor.m */,
 				AABB5DA5140E0C220020BA06 /* ActorKit.h */,
 				AA2FB49E141F533C00E57E01 /* ActorProxy.h */,
 				AA2FB49F141F533C00E57E01 /* ActorProxy.m */,
@@ -151,6 +169,9 @@
 				AA2FB4A9141F5EB700E57E01 /* NSObject+Actor.h in Headers */,
 				AA9A97881419785000A2994E /* NSThread+Actor.h in Headers */,
 				AA300E071420649100A63289 /* SyncProxy.h in Headers */,
+				AA38C81B142162020081CA9C /* NSArray+Actor.h in Headers */,
+				AA38C820142163F60081CA9C /* BatchProxy.h in Headers */,
+				AA38C824142178190081CA9C /* NSInvocation+Copy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +242,9 @@
 				AA2FB4A5141F533C00E57E01 /* FutureProxy.m in Sources */,
 				AA2FB4AA141F5EB700E57E01 /* NSObject+Actor.m in Sources */,
 				AA300E081420649100A63289 /* SyncProxy.m in Sources */,
+				AA38C81C142162020081CA9C /* NSArray+Actor.m in Sources */,
+				AA38C821142163F60081CA9C /* BatchProxy.m in Sources */,
+				AA38C825142178190081CA9C /* NSInvocation+Copy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

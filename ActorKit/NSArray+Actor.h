@@ -6,15 +6,9 @@
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
-#import "ActorProxy.h"
-#import "SyncProxy.h"
+#import <Foundation/Foundation.h>
 #import "BatchProxy.h"
 
-@interface NSObject (NSObject_Actor)
-
-- proxyForProxyClass:(Class)aClass;
-
-- asActor;
-- asSynchronous;
-
+@interface NSArray (NSArray_Actor)
+- asBatch;
 @end

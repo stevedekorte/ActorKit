@@ -15,11 +15,18 @@
 @synthesize actorMutex;
 @synthesize firstFuture;
 @synthesize actorThread;
+@synthesize actorQueueSize;
+@synthesize actorQueueLimit;
 
 - init
 {
     //self = [super init]; // NSProxy doesn't implement init
 	return self;
+}
+
+- (void)setProxyTarget:anObject
+{
+	[self setActorTarget:anObject];
 }
 
 - (NSThread *)actorThreadCreateOrResumeIfNeeded
@@ -36,7 +43,7 @@
 	}
 	else
 	{
-		[actorMutex resumeThread];
+		[actorMutex resumeAnyWaitingThreads];
 	}
 	
 	return thread;
@@ -57,7 +64,9 @@
 
 - (FutureProxy *)futurePerformInvocation:(NSInvocation *)anInvocation
 {
+	BOOL willPauseCaller = NO;
 	NSLock *lock = [[self actorThread] lock];
+	
 	[lock lock];
 
 	FutureProxy *future = [[[FutureProxy alloc] init] autorelease];
@@ -75,8 +84,17 @@
 		[self setFirstFuture:future];
 	}
 	
+	actorQueueSize ++;
+	
 	[self actorThreadCreateOrResumeIfNeeded];
+	
+	willPauseCaller = (actorQueueLimit && actorQueueLimit == actorQueueSize);
 	[lock unlock];
+	
+	if(willPauseCaller)
+	{
+		[future pauseThreadOnQueueLimitMutex];
+	}
 	
 	return future;
 }
@@ -97,9 +115,10 @@
 		while([self firstFuture])
 		{
 			FutureProxy *f = [self firstFuture];
-			[f futureSend]; // exceptions are caught within the send method
+			[f futureSend]; // exceptions are caught within the futureSend method
 			[lock lock];
 			[self setFirstFuture:[f nextFuture]];
+			actorQueueSize --;
 			[lock unlock];
 		}
 		

@@ -7,6 +7,8 @@
 //
 
 #import "ActorProxy.h"
+#import "BatchProxy.h"
+#import "SyncProxy.h"
 #import "NSObject+Actor.h"
 
 // private

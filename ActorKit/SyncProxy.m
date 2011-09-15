@@ -16,9 +16,7 @@
 
 - init
 {
-    //self = [super init]; // NSProxy doesn't implement init
 	[self setSyncProxyLock:[[[NSLock alloc] init] autorelease]];
-	//[[syncProxyLock setName:[syncProxyTarget description]];
 	return self;
 }
 
@@ -27,6 +25,12 @@
 	[self setSyncProxyTarget:nil];
 	[self setSyncProxyLock:nil];
 	[super dealloc];
+}
+
+- (void)setProxyTarget:anObject
+{
+	[self setSyncProxyTarget:anObject];
+	[syncProxyLock setName:[syncProxyTarget description]];
 }
 
 - (BOOL)respondsToSelector:(SEL)aSelector

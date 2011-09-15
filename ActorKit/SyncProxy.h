@@ -18,4 +18,6 @@
 @property (retain, atomic) id syncProxyTarget;
 @property (retain, atomic) NSLock *syncProxyLock;
 
+- (void)setProxyTarget:anObject;
+
 @end

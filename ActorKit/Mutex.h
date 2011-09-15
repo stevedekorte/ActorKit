@@ -20,6 +20,6 @@
 
 - (BOOL)isPaused;
 - (void)pauseThread;
-- (void)resumeThread;
+- (void)resumeAnyWaitingThreads;
 
 @end

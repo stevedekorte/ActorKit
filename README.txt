@@ -1,9 +1,12 @@
 
 
-About:
+About
 
 	ActorKit is a framework supporting multithreaded actors with transparent futures in Objective-C.
 
+
+ActorProxy and FutureProxy
+	
 	Sending an "asActor" message to any object returns an actor proxy for the object.
 
 	Each actor spawns an os thread to process it's queue of messages. 
@@ -17,10 +20,13 @@ About:
 		
 	Futures detect and raise an exception in situations where pausing the calling thread 
 	would cause a deadlock.
+	
+	An actor's queue limit can be set with the setActorQueueLimit: method.
+	When it's message queue reaches that limit, calling threads will be paused. 
+	This is an automatic way of avoiding excessive spawning of actors.
 
 
-
-Example:
+	Example
 
 	// these spawn threads for each actor to and return immediately
 
@@ -41,12 +47,35 @@ Example:
 	// dataWithContentsOfURL: is a class method but actors have to be instances
  
 	@implementation NSURL (fetch)
-	- (NSData *)fetch:sender { return [NSData dataWithContentsOfURL:self]; }
+	- (NSData *)fetch { return [NSData dataWithContentsOfURL:self]; }
 	@end
+
+
+
+SyncProxy
+
+	Calling asSynchronous on any object returns a SyncProxy for it. Example:
+
+	NSMutableDictionary *dict = [[NSMutableDictionary dictionary] asSynchronous];
+
+	Now message sends from all threads to dict will be locked such that only one 
+	thread can access it at a time.
+
+
+
+BatchProxy
+
+	Calling batch on an NSArray returns a BatchProxy which can be used to do
+	a parallel "map" using GCD (BSD workerqueues). Example:
+
+	NSArray *results = [[urls asBatch] fetch];
+
+	You can also combine asSynchronous and asBatch to get the type of synchronization
+	and parallelism that suits your problem.
+
+		
 	
-	
-	
-Notes:
+Notes
 
 	Exceptions that occur while an actor processes a message will be
 	passed to the future and raised in all the threads that attempt to access the future.
@@ -63,31 +92,32 @@ Notes:
 	Objects store their actor proxies as an associated object so the same 
 	actor is returned for multiple calls of asActor on the same instance.
 	
-	
-	
-SyncProxy
 
-	As an extra feature, NSObject is also extended to have a asSynchronous method.
-	Calling it will return a proxy to the object which will ensure that only one thread
-	can message the object at a time. This allows any Objective-C class to be used
-	in a thread safe way. This does no checks for deadlocks and may not be optimal 
-	in performance, but it is an convenient way to get object level thread safety.
-	
-	
-Example:
 
-	// just call asSynchronous to get the proxy
-	
-	NSMutableDictionary *dict = [[NSMutableDictionary dictionary] asSynchronous];
-	
-	// now message sends from all threads to dict will be locked such that only one 
-	// thread can access it at a time. Again, this does not use busy waits.
-	
-	
+To Do
 
-Credits:
+	- extend collection classes to use workqueues for makeObjectsPerform: etc
+	
+	- future notifications of some kind
 
-	Thanks to Mark Papadakis for help me figure out how to properly use mutex conditions.
+	- tests
+	
+	- convenience methods for returning NSNumbers instead of C types
+
+	- convenience methods for performing blocking ops via single calls to instance methods
+	
+	- deadlock detection for actor queue limit, synchronous and batches
+	
+	- add a total queue and/or total actor limits
+	
+	- better respondsToSelector implementation
+
+
+
+Credits
+
+	Thanks to Mark Papadakis for tips on mutex conditions.
+	IIRC I saw the BatchProxy pattern first used in Io by quag.
 	
 	
 	
