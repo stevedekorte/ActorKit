@@ -49,11 +49,14 @@
 		  NSStringFromSelector([anInvocation selector])]];
 	}
 	
+	[anInvocation retain]; // uh, why?
 	[anInvocation retainArguments];
 
 	NSInteger length = [batchTarget count];
 	id *results = calloc(0, sizeof(id) * length);
-			
+	
+	// use an invocation pool?
+	
 	dispatch_apply(length, [self batchDispatchQueue], 
 		^(size_t i)
 		{
@@ -66,7 +69,7 @@
 			id r;
 			[copyInvocation getReturnValue:&r];
 			results[i] = r;
-			[copyInvocation release];
+			[copyInvocation release]; // ?
 			//printf("end %i\n", (int)i);
 		}
 	);
