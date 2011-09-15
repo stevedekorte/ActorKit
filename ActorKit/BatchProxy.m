@@ -40,8 +40,10 @@
 	return dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 }
 
-- (void)forwardInvocation:(NSInvocation *)anInvocation
+- (void)forwardInvocation:(NSInvocation *)theInvocation
 {
+	__block anInvocation = theInvocation;
+	
 	if([[anInvocation methodSignature] methodReturnType][0] != '@')
 	{
 		[NSException raise:@"BatchProxy" format:
@@ -53,7 +55,7 @@
 	[anInvocation retainArguments];
 
 	NSInteger length = [batchTarget count];
-	id *results = calloc(0, sizeof(id) * length);
+	__block id *results = calloc(0, sizeof(id) * length);
 	
 	// use an invocation pool?
 	

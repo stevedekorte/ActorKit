@@ -2,53 +2,39 @@
 
 About
 
-	ActorKit is a framework supporting multithreaded actors with transparent futures in Objective-C.
+	ActorKit is a framework for multithreaded actors with transparent futures in Objective-C.
 
 
-ActorProxy and FutureProxy
+ActorProxy
 	
 	Sending an "asActor" message to any object returns an actor proxy for the object.
-
-	Each actor spawns an os thread to process it's queue of messages. 
 	
 	Sending messages to the actor will queue them to be processed in first-in-first-out order 
 	by the actor's thread and immediately returns a "future" object.
 	
-	A future is a proxy for the result. If it is accessed before the result is ready, it
-	pauses any calling threads until it is ready. After it is ready, it acts as a transparent
-	proxy for the result, passing messages to the result as if the future were the same object.
+	When it's message queue reaches that limit (settable with setActorQueueLimit:), 
+	calling threads will be paused. 
+
+
+
+FutureProxy
+
+	A future is a transparent proxy for the result which, when accessed before the 
+	result is ready, will pauses calling threads until it is ready. 	
 		
-	Futures detect and raise an exception in situations where pausing the calling thread 
-	would cause a deadlock.
+	Futures auto detect and raise an exception in deadlock situations.
 	
-	An actor's queue limit can be set with the setActorQueueLimit: method.
-	When it's message queue reaches that limit, calling threads will be paused. 
-	This is an automatic way of avoiding excessive spawning of actors.
-
-
 	Example
 
 	// these spawn threads for each actor to and return immediately
 
-	NSData *future1 = [(NSURL *)[[NSURL URLWithString:@"http://yahoo.com"] asActor] fetch];
-	NSData *future2 = [(NSURL *)[[NSURL URLWithString:@"http://google.com"] asActor] fetch];
+	NSData *aFuture = [(NSURL *)[[@"http://yahoo.com" asURL] asActor] fetch];
 
 	// ... do stuff that doesn't need to wait on the results ...
 	
 	// now when we try to access the values, they block if the values aren't ready
 
-	NSLog(@"request 1 returned %i bytes", (int)[future1 length]); 
-	NSLog(@"request 2 returned %i bytes", (int)[future2 length]);
-
-	// We just did a safe, coordinated interaction between three threads 
-	// by only adding two tokens and with no state machines or callbacks
-
-	// you'll need to add this method for the above example because 
-	// dataWithContentsOfURL: is a class method but actors have to be instances
- 
-	@implementation NSURL (fetch)
-	- (NSData *)fetch { return [NSData dataWithContentsOfURL:self]; }
-	@end
+	NSLog(@"request returned %i bytes", (int)[aFuture length]); 
 
 
 
@@ -77,16 +63,11 @@ Notes
 	passed to the future and raised in all the threads that attempt to access the future.
 	
 	It's ok for multiple threads to look at the same future. 
-	Each will block until the future is ready.
 	  
-	All blocking is done by pausing/resuming the requesting thread.
 	ActorKit does no busy waits.
 	
-	When an actor finishes processing it's message queue, it's thread
-	is paused until a new message is added to the queue.
-	
-	Objects store their actor proxies as an associated object so the same 
-	actor is returned for multiple calls of asActor on the same instance.
+	Objects store their proxies as an associated objects so the same 
+	proxy is returned for an instance.
 	
 
 
