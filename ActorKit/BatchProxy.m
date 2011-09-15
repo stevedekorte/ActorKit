@@ -67,12 +67,10 @@
 		}
 	);
 
-	NSMutableArray *resultsArray = [NSMutableArray arrayWithCapacity:length];
-	
-	for(size_t i = 0; i < length; i ++)
-	{
-		[resultsArray addObject:results[i]];
-	}
+	NSMutableArray *resultsArray = [NSMutableArray 
+									arrayWithObjects:results count:length];
+
+	free(results); //NSArray docs don't mention who owns the memory, so assume it's a copy
 	
 	[anInvocation setReturnValue:(void *)&resultsArray];
 }
