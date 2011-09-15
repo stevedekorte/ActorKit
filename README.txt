@@ -58,20 +58,16 @@ SyncProxy
 
 	NSMutableDictionary *dict = [[NSMutableDictionary dictionary] asSynchronous];
 
-	Now message sends from all threads to dict will be locked such that only one 
-	thread can access it at a time.
+	You now have a thread safe dictionary.
 
 
 
 BatchProxy
 
-	Calling batch on an NSArray returns a BatchProxy which can be used to do
+	Calling asBatch on an NSArray returns a BatchProxy which can be used to do
 	a parallel "map" using GCD (BSD workerqueues). Example:
 
 	NSArray *results = [[urls asBatch] fetch];
-
-	You can also combine asSynchronous and asBatch to get the type of synchronization
-	and parallelism that suits your problem.
 
 		
 	
@@ -106,11 +102,13 @@ To Do
 
 	- convenience methods for performing blocking ops via single calls to instance methods
 	
-	- deadlock detection for actor queue limit, synchronous and batches
+	- auto deadlock detection for actor queue limit, synchronous and batches
 	
 	- add a total queue and/or total actor limits
 	
 	- better respondsToSelector implementation
+	
+	- chainable batch groups with in, out, and error queues
 
 
 

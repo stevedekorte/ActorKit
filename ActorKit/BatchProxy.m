@@ -21,7 +21,7 @@
 
 - (void)dealloc
 {
-	
+	[self setBatchTarget:nil];
 	[super dealloc];
 }
 
