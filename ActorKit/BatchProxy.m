@@ -49,21 +49,25 @@
 		  NSStringFromSelector([anInvocation selector])]];
 	}
 	
-	NSInteger length = [batchTarget length];
-	id *results = calloc(0, sizeof(id) * length);
-	
 	[anInvocation retainArguments];
-		
+
+	NSInteger length = [batchTarget count];
+	id *results = calloc(0, sizeof(id) * length);
+			
 	dispatch_apply(length, [self batchDispatchQueue], 
 		^(size_t i)
 		{
+			//printf("start %i\n", (int)i);
 			id item = [batchTarget objectAtIndex:i];
 			NSInvocation *copyInvocation = [anInvocation copy];
+			[copyInvocation retain];
 			[copyInvocation invokeWithTarget:item];
 			
 			id r;
 			[copyInvocation getReturnValue:&r];
 			results[i] = r;
+			[copyInvocation release];
+			//printf("end %i\n", (int)i);
 		}
 	);
 
@@ -77,7 +81,14 @@
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
 {
-	return [batchTarget methodSignatureForSelector:aSelector];
+	if([batchTarget count])
+	{
+		id firstObject = [batchTarget objectAtIndex:0];
+		NSMethodSignature *sig =  [firstObject methodSignatureForSelector:aSelector];
+		return sig;
+	}
+	
+	return nil;
 }
 
 @end

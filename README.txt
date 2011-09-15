@@ -92,6 +92,8 @@ Notes
 
 To Do
 
+	- handle BatchProxy exceptions
+	
 	- extend collection classes to use workqueues for makeObjectsPerform: etc
 	
 	- future notifications of some kind

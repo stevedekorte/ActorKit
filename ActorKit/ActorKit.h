@@ -10,6 +10,7 @@
 #import "BatchProxy.h"
 #import "SyncProxy.h"
 #import "NSObject+Actor.h"
+#import "NSArray+Actor.h"
 
 // private
 
