@@ -6,30 +6,30 @@
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
-#import "SyncProxy.h"
+#import "ThreadSafeProxy.h"
 
 
-@implementation SyncProxy
+@implementation ThreadSafeProxy
 
 @synthesize syncProxyTarget;
 @synthesize syncProxyLock;
 
 - init
 {
-	[self setSyncProxyLock:[[[NSLock alloc] init] autorelease]];
+	[self setThreadSafeProxyLock:[[[NSLock alloc] init] autorelease]];
 	return self;
 }
 
 - (void)dealloc
 {
-	[self setSyncProxyTarget:nil];
-	[self setSyncProxyLock:nil];
+	[self setThreadSafeProxyTarget:nil];
+	[self setThreadSafeProxyLock:nil];
 	[super dealloc];
 }
 
 - (void)setProxyTarget:anObject
 {
-	[self setSyncProxyTarget:anObject];
+	[self setThreadSafeProxyTarget:anObject];
 	[syncProxyLock setName:[syncProxyTarget description]];
 }
 

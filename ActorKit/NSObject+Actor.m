@@ -30,9 +30,9 @@
 	return [self proxyForProxyClass:[ActorProxy class]];
 }
 
-- asSynchronous
+- asThreadSafe
 {
-	return [self proxyForProxyClass:[SyncProxy class]];
+	return [self proxyForProxyClass:[ThreadSafeProxy class]];
 }
 
 /*
@@ -52,16 +52,16 @@ static char *actorKey = "ActorProxy";
 	return (id)actor;	
 }
 
-static char *synchoronousKey = "SyncProxy";
+static char *synchoronousKey = "ThreadSafeProxy";
 
-- asSynchronous
+- asThreadSafe
 {
-	SyncProxy *sp = objc_getAssociatedObject(self, synchoronousKey);
+	ThreadSafeProxy *sp = objc_getAssociatedObject(self, synchoronousKey);
 	
 	if(!sp)
 	{
-		sp = [[[SyncProxy alloc] init] autorelease];
-		[sp setSyncProxyTarget:self];
+		sp = [[[ThreadSafeProxy alloc] init] autorelease];
+		[sp setThreadSafeProxyTarget:self];
 		objc_setAssociatedObject(self, synchoronousKey, sp, OBJC_ASSOCIATION_ASSIGN);
 	}
 	

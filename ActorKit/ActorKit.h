@@ -8,7 +8,7 @@
 
 #import "ActorProxy.h"
 #import "BatchProxy.h"
-#import "SyncProxy.h"
+#import "ThreadSafeProxy.h"
 #import "NSObject+Actor.h"
 #import "NSArray+Actor.h"
 

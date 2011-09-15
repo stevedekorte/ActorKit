@@ -7,7 +7,7 @@
 //
 
 #import "ActorProxy.h"
-#import "SyncProxy.h"
+#import "ThreadSafeProxy.h"
 #import "BatchProxy.h"
 
 @interface NSObject (NSObject_Actor)
@@ -15,6 +15,6 @@
 - proxyForProxyClass:(Class)aClass;
 
 - asActor;
-- asSynchronous;
+- asThreadSafe;
 
 @end

@@ -42,7 +42,7 @@
 
 - (void)forwardInvocation:(NSInvocation *)theInvocation
 {
-	__block anInvocation = theInvocation;
+	__block NSInvocation *anInvocation = theInvocation;
 	
 	if([[anInvocation methodSignature] methodReturnType][0] != '@')
 	{

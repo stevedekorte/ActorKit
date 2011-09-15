@@ -26,25 +26,25 @@ FutureProxy
 	
 	Example
 
-	// these spawn threads for each actor to and return immediately
+	// the fetch return a future immediately
 
 	NSData *aFuture = [(NSURL *)[[@"http://yahoo.com" asURL] asActor] fetch];
 
-	// ... do stuff that doesn't need to wait on the results ...
+	// ... do stuff ...
 	
-	// now when we try to access the values, they block if the values aren't ready
+	// now when we try to access the values, the thread waits if the values aren't ready
 
 	NSLog(@"request returned %i bytes", (int)[aFuture length]); 
 
 
 
-SyncProxy
+ThreadSafeProxy
 
-	Calling asSynchronous on any object returns a SyncProxy for it. Example:
+	Calling asThreadSafe on any object returns a proxy that ensures only one thread
+	can access it at a time. Example:
 
-	NSMutableDictionary *dict = [[NSMutableDictionary dictionary] asSynchronous];
+	NSMutableDictionary *dict = [[NSMutableDictionary dictionary] asThreadSafe];
 
-	You now have a thread safe dictionary.
 
 
 
@@ -54,6 +54,9 @@ BatchProxy
 	a parallel "map" using GCD (BSD workerqueues). Example:
 
 	NSArray *results = [[urls asBatch] fetch];
+	
+	Sends concurrent fetch messages to each element of the urls array and returns
+	an array containing the results.
 
 		
 	
@@ -75,11 +78,11 @@ To Do
 
 	- handle BatchProxy exceptions
 	
-	- extend collection classes to use workqueues for makeObjectsPerform: etc
-	
+	- make sure all locks deal with exceptions
+			
 	- future notifications of some kind
 
-	- tests
+	- more tests
 	
 	- convenience methods for returning NSNumbers instead of C types
 
