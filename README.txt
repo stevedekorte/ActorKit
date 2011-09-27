@@ -12,15 +12,16 @@ ActorProxy
 	Sending messages to the actor will queue them to be processed in first-in-first-out order 
 	by the actor's thread and immediately returns a "future" object.
 	
-	When it's message queue reaches that limit (settable with setActorQueueLimit:), 
-	calling threads will be paused. 
+	If it's message queue exceeds a given limit (set with setActorQueueLimit:), 
+	the calling threads that exceeded the limit will be paused until the more
+        of the queue is processed.
 
 
 
 FutureProxy
 
 	A future is a transparent proxy for the result which, when accessed before the 
-	result is ready, will pauses calling threads until it is ready. 	
+	result is ready, pauses any threads attempting to access it until it is ready. 	
 		
 	Futures auto detect and raise an exception in deadlock situations.
 	
@@ -32,7 +33,8 @@ FutureProxy
 
 	// ... do stuff ...
 	
-	// now when we try to access the values, the thread waits if the values aren't ready
+	// now when we try to access the values, 
+        // the thread waits if the values aren't ready
 
 	NSLog(@"request returned %i bytes", (int)[aFuture length]); 
 

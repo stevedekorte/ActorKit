@@ -14,15 +14,11 @@
 - (id)copy
 {
 	NSInvocation *copy = [NSInvocation invocationWithMethodSignature:[self methodSignature]];
-	//[copy setTarget:[self target]];
-	//[copy setSelector:[self selector]];
-	
-	char buffer[sizeof(intmax_t)]; 
-	
 	NSUInteger argCount = [[self methodSignature] numberOfArguments];
 	
 	for (int i = 0; i < argCount; i++)
 	{
+		char buffer[sizeof(intmax_t)]; 
 		[self getArgument:(void *)&buffer atIndex:i];
 		[copy setArgument:(void *)&buffer atIndex:i];
 	}

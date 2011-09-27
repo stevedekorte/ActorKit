@@ -11,8 +11,8 @@
 
 @implementation ThreadSafeProxy
 
-@synthesize syncProxyTarget;
-@synthesize syncProxyLock;
+@synthesize threadSafeProxyTarget;
+@synthesize threadSafeProxyLock;
 
 - init
 {
@@ -30,12 +30,12 @@
 - (void)setProxyTarget:anObject
 {
 	[self setThreadSafeProxyTarget:anObject];
-	[syncProxyLock setName:[syncProxyTarget description]];
+	[threadSafeProxyLock setName:[threadSafeProxyTarget description]];
 }
 
 - (BOOL)respondsToSelector:(SEL)aSelector
 {
-	return [syncProxyTarget respondsToSelector:aSelector];
+	return [threadSafeProxyLock respondsToSelector:aSelector];
 }
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation
@@ -43,14 +43,14 @@
 	// probably could have used @synchronized() {} 
 	// but access to the lock object might be useful later
 	
-	[syncProxyLock lock];
-	[anInvocation invokeWithTarget:syncProxyTarget];
-	[syncProxyLock unlock];
+	[threadSafeProxyLock lock];
+	[anInvocation invokeWithTarget:threadSafeProxyTarget];
+	[threadSafeProxyLock unlock];
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
 {
-	return [syncProxyTarget methodSignatureForSelector:aSelector];
+	return [threadSafeProxyTarget methodSignatureForSelector:aSelector];
 }
 
 @end

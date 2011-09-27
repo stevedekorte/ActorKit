@@ -9,15 +9,15 @@
 
 @interface ThreadSafeProxy : NSProxy
 {	
-	id syncProxyTarget;
-	NSLock *syncProxyLock;
+	id threadSafeProxyTarget;
+	NSLock *threadSafeProxyLock;
 }
 
 // all private
 
-@property (retain, atomic) id syncProxyTarget;
-@property (retain, atomic) NSLock *syncProxyLock;
+@property (retain, atomic) id threadSafeProxyTarget;
+@property (retain, atomic) NSLock *threadSafeProxyLock;
 
-- (void)setProxyTarget:anObject;
+- (void)setThreadSafeProxyTarget:anObject;
 
 @end
