@@ -65,14 +65,15 @@ BatchProxy
 Notes
 
 	Exceptions that occur while an actor processes a message will be
-	passed to the future and raised in all the threads that attempt to access the future.
+	passed to the future and raised in all the threads that attempt 
+        to access the future.
 	
 	It's ok for multiple threads to look at the same future. 
 	  
 	ActorKit does no busy waits.
 	
 	Objects store their proxies as an associated objects so the same 
-	proxy is returned for an instance.
+	proxy is returned for a given instance.
 	
 
 
@@ -86,19 +87,18 @@ To Do
 
 	- more tests
 	
-	- convenience methods for returning NSNumbers instead of C types
-
-	- convenience methods for performing blocking ops via single calls to instance methods
-	
-	- auto deadlock detection for actor queue limit, synchronous and batches
+	- auto deadlock detection for actor queue limit and batches
 	
 	- add a total queue and/or total actor limits
 	
 	- better respondsToSelector implementation
 	
-	- chainable batch groups with in, out, and error queues
+	- (maybe) chainable persistent batch groups with in, out, and error queues
 
+	- (maybe) integrate with distibuted objects to allow bundles and data to
+	  be distributed...
 
+	- (maybe) explore synchronization via ownership 
 
 Credits
 
