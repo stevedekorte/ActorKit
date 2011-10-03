@@ -103,6 +103,8 @@ Credits
 
 	Thanks to Mark Papadakis for tips on mutex conditions.
 	IIRC I saw the BatchProxy pattern first used in Io by quag.
-	
+
+	If you use this project, please drop me a line and let me 
+        know if you found it useful. Thanks.
 	
 	
