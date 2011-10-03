@@ -1,5 +1,4 @@
 
-
 About
 
 	ActorKit is a framework for multithreaded actors with transparent futures in Objective-C.
@@ -12,7 +11,7 @@ ActorProxy
 	Sending messages to the actor will queue them to be processed in first-in-first-out order 
 	by the actor's thread and immediately returns a "future" object.
 	
-	If it's message queue exceeds a given limit (set with setActorQueueLimit:), 
+	If its message queue exceeds a given limit (set with setActorQueueLimit:), 
 	the calling threads that exceeded the limit will be paused until the more
         of the queue is processed.
 
