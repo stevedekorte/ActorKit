@@ -1,7 +1,7 @@
 
 About
 
-	ActorKit is a framework for multithreaded actors with transparent futures in Objective-C.
+	ActorKit is a very lightweight (under 300 semicolons) framework for multithreaded actors with transparent futures in Objective-C.
 
 
 ActorProxy
