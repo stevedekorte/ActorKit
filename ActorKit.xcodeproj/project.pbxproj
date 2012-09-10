@@ -201,6 +201,9 @@
 /* Begin PBXProject section */
 		AABB5D8B140E0C220020BA06 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+			};
 			buildConfigurationList = AABB5D8E140E0C220020BA06 /* Build configuration list for PBXProject "ActorKit" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -310,6 +313,7 @@
 		AABB5DAB140E0C220020BA06 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
@@ -324,6 +328,7 @@
 		AABB5DAC140E0C220020BA06 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;

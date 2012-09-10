@@ -46,9 +46,10 @@
 	
 	if([[anInvocation methodSignature] methodReturnType][0] != '@')
 	{
-		[NSException raise:@"BatchProxy" format:
-		 [NSString stringWithFormat:@"sent '%@' but only methods that return objects are supported", 
-		  NSStringFromSelector([anInvocation selector])]];
+		NSString *msg = [NSString stringWithFormat:@"sent '%@' but only methods that return objects are supported",
+						 NSStringFromSelector([anInvocation selector])];
+		NSLog(@"BatchProxy ERROR: %@", msg);
+		[NSException raise:@"BatchProxy" format:@"%@", msg];
 	}
 	
 	[anInvocation retain]; // uh, why?

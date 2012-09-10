@@ -33,6 +33,8 @@
 @property (retain, atomic) Mutex *futureLock;
 @property (retain, atomic) Mutex *futureQueueLimitMutex;
 
+- (id)init;
+
 - (void)futureAppend:(FutureProxy *)aFuture;
 - (void)futureSend;
 

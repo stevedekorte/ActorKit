@@ -44,9 +44,9 @@
 	}
 }
 
-- (Mutex *)lock
+- (NSLock *)lock
 {
-	Mutex *lock = [[self threadDictionary] objectForKey:@"lock"];
+	NSLock *lock = [[self threadDictionary] objectForKey:@"lock"];
 	
 	if (lock == nil)
 	{

@@ -36,4 +36,10 @@
 
 @property (assign, atomic) size_t actorQueueLimit;
 
++ (ActorProxy *)currentActorProxy;
+
+- (id)pauseThread; // returns with object passed to resumeThreadWithReturnObject:
+- (void)resumeThread;
+- (void)resumeThreadWithReturnObject:(id)returnValue;
+
 @end

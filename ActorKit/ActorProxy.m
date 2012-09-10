@@ -7,7 +7,7 @@
 //
 
 #import "ActorProxy.h"
-
+#import "FutureProxy.h"
 
 @implementation ActorProxy
 
@@ -39,6 +39,8 @@
 		thread = [[[NSThread alloc] initWithTarget:self selector:@selector(actorRunLoop:) object:nil] autorelease];
 		[self setActorThread:thread];
 		[thread setName:[NSString stringWithFormat:@"%@", [actorTarget className]]];
+		
+		[[thread threadDictionary] setObject:self forKey:@"actorProxy"];
 		[thread start];
 	}
 	else
@@ -142,9 +144,10 @@
 {
 	if([[anInvocation methodSignature] methodReturnType][0] != '@')
 	{
-		[NSException raise:@"ActorProxy" format:
-		 [NSString stringWithFormat:@"sent '%@' but only methods that return objects are supported", 
-		  NSStringFromSelector([anInvocation selector])]];
+		NSString *msg = [NSString stringWithFormat:@"sent '%@' but only methods that return objects are supported",
+						 NSStringFromSelector([anInvocation selector])];
+		NSLog(@"ActorProxy ERROR: %@", msg);
+		[NSException raise:@"ActorProxy" format:@"%@", msg];
 	}
 	
 	FutureProxy *f = [self futurePerformInvocation:anInvocation];
@@ -155,5 +158,37 @@
 {
 	return [actorTarget methodSignatureForSelector:aSelector];
 }
+
+// --- pausing and resuming ---
+//
+// for use from within an actor method executing in order to
+// pause actor thread while waiting on async ops or other callbacks
+
++ (ActorProxy *)currentActorProxy
+{
+	return [[[NSThread currentThread] threadDictionary] objectForKey:@"actorProxy"];
+}
+
+- (id)pauseThread
+{
+	[actorMutex pauseThread];
+	id returnValue = [[[NSThread currentThread] threadDictionary] objectForKey:@"returnValue"];
+	[[[NSThread currentThread] threadDictionary] removeObjectForKey:@"returnValue"];
+	return returnValue;
+}
+
+- (void)resumeThread
+{
+	[actorMutex resumeAnyWaitingThreads];
+}
+
+- (void)resumeThreadWithReturnObject:(id)returnValue
+{
+	// might move returnValue to ivar
+	[[[NSThread currentThread] threadDictionary] setObject:returnValue forKey:@"returnValue"];
+	[self resumeThread];
+}
+
+
 
 @end
