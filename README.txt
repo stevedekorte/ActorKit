@@ -59,7 +59,39 @@ BatchProxy
 	Sends concurrent fetch messages to each element of the urls array and returns
 	an array containing the results.
 
-		
+
+
+
+Dealing with Async Callbacks
+
+	To deal with async callbacks within an actor's thread, pauseThread and resumeThread can be used.  Example:
+
+
+	__block id response = nil;
+	__block NSError *error = nil;
+	__block ActorProxy *actor = [ActorProxy currentActorProxy];
+
+	_request = [s3Client getBucket:_bucketName
+		success:^(id responseObject) 
+		{
+			response = responseObject;
+			[actor resumeThread];	
+		}
+		failure:^(NSError *e)
+		{
+			error = e;
+			[actor resumeThread];
+		}
+	];
+					   
+	id returnValue = [[ActorProxy currentActorProxy] pauseThread];
+	
+	if(error)
+	{
+		[NSException raise:@"SyncKitError" format:[error description]];
+	}
+
+	Also, if the thread is resumed using resumeThreadWithValue:, the pauseThread method will return the given value. 
 	
 Notes
 
@@ -74,6 +106,7 @@ Notes
 	Objects store their proxies as an associated objects so the same 
 	proxy is returned for a given instance.
 	
+
 
 
 To Do
