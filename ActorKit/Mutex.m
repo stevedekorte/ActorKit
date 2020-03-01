@@ -2,7 +2,6 @@
 //  Mutex.m
 //  ActorKit
 //
-//  Created by Steve Dekorte on 20110830.
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
@@ -47,8 +46,7 @@
 	pthread_mutex_lock(&mutex);
 	isPaused = YES;
 	
-	while (isPaused) 
-	{
+	while (isPaused) {
 		pthread_cond_wait(&condition, &mutex);
 	}
 	
@@ -57,8 +55,7 @@
 
 - (void)resumeAnyWaitingThreads
 {	
-	if(isPaused)
-	{
+	if (isPaused) {
 		pthread_mutex_lock(&mutex);
 		isPaused = NO;	
 		pthread_cond_broadcast(&condition);

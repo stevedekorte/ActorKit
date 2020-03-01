@@ -2,7 +2,6 @@
 //  NSObject+Actor.m
 //  ActorKit
 //
-//  Created by Steve Dekorte on 20110831.
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
@@ -44,7 +43,7 @@
 {
 	__block NSInvocation *anInvocation = theInvocation;
 	
-	if([[anInvocation methodSignature] methodReturnType][0] != '@')
+	if ([[anInvocation methodSignature] methodReturnType][0] != '@')
 	{
 		NSString *msg = [NSString stringWithFormat:@"sent '%@' but only methods that return objects are supported",
 						 NSStringFromSelector([anInvocation selector])];
@@ -87,8 +86,7 @@
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
 {
-	if([batchTarget count])
-	{
+	if ([batchTarget count]) {
 		id firstObject = [batchTarget objectAtIndex:0];
 		NSMethodSignature *sig =  [firstObject methodSignatureForSelector:aSelector];
 		return sig;

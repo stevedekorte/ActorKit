@@ -2,10 +2,8 @@
 //  Mutex.h
 //  ActorKit
 //
-//  Created by Steve Dekorte on 20110830.
 //  Copyright 2011 Steve Dekorte. BSD licensed.
-
-
+//
 
 @interface Mutex : NSObject
 {

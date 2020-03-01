@@ -2,7 +2,6 @@
 //  NSObject+Actor.h
 //  ActorKit
 //
-//  Created by Steve Dekorte on 20110831.
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
@@ -13,7 +12,6 @@
 @interface ActorProxy : NSProxy
 {
 	// using the "actor" prefix to avoid name conflict with proxied object
-	
 	id actorTarget;
 	Mutex *actorMutex;
 	FutureProxy *firstFuture;

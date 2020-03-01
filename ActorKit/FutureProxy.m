@@ -2,7 +2,6 @@
 //  Future.m
 //  ActorKit
 //
-//  Created by Steve Dekorte on 20110830.
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
@@ -51,12 +50,9 @@
 
 - (void)futureAppend:(FutureProxy *)aFuture
 {
-	if(nextFuture)
-	{
+	if (nextFuture) {
 		[nextFuture futureAppend:aFuture];
-	}
-	else
-	{
+	} else {
 		[self setNextFuture:aFuture];
 	}
 }
@@ -77,23 +73,19 @@
 {
 	[futureQueueLimitMutex resumeAnyWaitingThreads];
 	
-	@try 
-	{
+	@try {
 		//[self futureShowSend];
 		[futureInvocation invokeWithTarget:[futureActor actorTarget]];
 
 		id r;
 		[futureInvocation getReturnValue:(void *)&r];
 		[self setFutureResult:r];
-	}
-	@catch (NSException *e) 
-	{
+	} @catch (NSException *e) {
 		[self setFutureException:e];
 		[self setFutureResult:nil];
 	}
 	
-	for(NSThread *waitingThread in futureWaitingThreads)
-	{
+	for (NSThread *waitingThread in futureWaitingThreads) {
 		[waitingThread setWaitingOnFuture:nil];
 	}
 	
@@ -103,8 +95,7 @@
 
 - (void)setFutureResult:(id)anObject
 {
-	if(done) 
-	{	
+	if (done) {	
 		return;
 	}
 	
@@ -117,10 +108,8 @@
 {
 	// the recursion should avoid loop since the deadlock detection prevents loops
 	
-	for(NSThread *waitingThread in futureWaitingThreads)
-	{		
-		if([[waitingThread waitingOnFuture] isWaitingOnCurrentThread]) 
-		{
+	for (NSThread *waitingThread in futureWaitingThreads) {		
+		if ([[waitingThread waitingOnFuture] isWaitingOnCurrentThread]) {
 			return YES;
 		}
 	}
@@ -130,8 +119,7 @@
 
 - (void)futurePassExceptionIfNeeded
 {
-	if(futureException)
-	{
+	if (futureException) {
 		// guessing we have to wrap the exception so the stack info of original will be available
 		NSMutableDictionary *info = [NSMutableDictionary dictionary];
 		[info setObject:futureException forKey:@"exception"];
@@ -146,16 +134,14 @@
 
 - (void)futureRaiseExceptionIfDeadlock
 {
-	if([self isWaitingOnCurrentThread]) 
-	{
+	if ([self isWaitingOnCurrentThread]) {
 		[NSException raise:@"Future" format:@"waiting for result on this coroutine would cause a deadlock"];
 	}
 }
 
 - futureResult
 {	
-	if(done) 
-	{
+	if (done) {
 		[self futurePassExceptionIfNeeded];
 		return futureValue;
 	}

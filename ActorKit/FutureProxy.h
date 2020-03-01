@@ -2,7 +2,6 @@
 //  Future.h
 //  ActorKit
 //
-//  Created by Steve Dekorte on 20110830.
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 
 #import "Mutex.h"

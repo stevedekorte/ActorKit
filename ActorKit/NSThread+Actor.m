@@ -2,7 +2,6 @@
 //  NSObject+Actor.m
 //  ActorKit
 //
-//  Created by Steve Dekorte on 20110831.
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
@@ -15,12 +14,9 @@
 
 - (void)setWaitingOnFuture:(id)anObject
 {
-	if(anObject == nil)
-	{
+	if (anObject == nil) {
 		[[self threadDictionary] removeObjectForKey:@"waitingOnFuture"];
-	}
-	else
-	{
+	} else {
 		[[self threadDictionary] setObject:anObject forKey:@"waitingOnFuture"];
 	}
 }
@@ -34,12 +30,9 @@
 
 - (void)setLock:(id)anObject
 {
-	if(anObject == nil)
-	{
+	if (anObject == nil) {
 		[[self threadDictionary] removeObjectForKey:@"lock"];
-	}
-	else
-	{
+	} else {
 		[[self threadDictionary] setObject:anObject forKey:@"lock"];
 	}
 }
@@ -48,8 +41,7 @@
 {
 	NSLock *lock = [[self threadDictionary] objectForKey:@"lock"];
 	
-	if (lock == nil)
-	{
+	if (lock == nil) {
 		lock = [[[NSLock alloc] init] autorelease];
 		[self setLock:lock];
 	}

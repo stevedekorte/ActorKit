@@ -2,7 +2,6 @@
 //  NSObject+Actor.m
 //  ActorKit
 //
-//  Created by Steve Dekorte on 20110831.
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
@@ -15,8 +14,7 @@
 {
 	id obj = objc_getAssociatedObject(self, (void *)aClass);
 	
-	if(!obj)
-	{
+	if (!obj) {
 		obj = [[[aClass alloc] init] autorelease];
 		[obj setProxyTarget:self];
 		objc_setAssociatedObject(self, aClass, obj, OBJC_ASSOCIATION_ASSIGN);
@@ -42,7 +40,7 @@ static char *actorKey = "ActorProxy";
 {
 	ActorProxy *actor = objc_getAssociatedObject(self, actorKey);
 
-	if(!actor)
+	if (!actor)
 	{
 		actor = [[[ActorProxy alloc] init] autorelease];
 		[actor setActorTarget:self];
@@ -58,7 +56,7 @@ static char *synchoronousKey = "ThreadSafeProxy";
 {
 	ThreadSafeProxy *sp = objc_getAssociatedObject(self, synchoronousKey);
 	
-	if(!sp)
+	if (!sp)
 	{
 		sp = [[[ThreadSafeProxy alloc] init] autorelease];
 		[sp setThreadSafeProxyTarget:self];
