@@ -12,7 +12,7 @@ ActorProxy
 	by the actor's thread and immediately returns a "future" object.
 	
 	If its message queue exceeds a given limit (set with setActorQueueLimit:), 
-	the calling threads that exceeded the limit will be paused until the more
+	the calling threads that exceeded the limit will be paused until more
         of the queue is processed.
 
 
