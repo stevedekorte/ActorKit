@@ -20,8 +20,7 @@
 @synthesize futureLock;
 @synthesize futureQueueLimitMutex;
 
-- (id)init
-{
+- (id)init {
     //self = [super init]; // NSProxy doesn't implement init
     
 	if (self) 
@@ -35,8 +34,7 @@
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
 	[self setFutureActor:nil];
 	[self setFutureInvocation:nil];
 	[self setFutureValue:nil];
@@ -48,8 +46,7 @@
 	[super dealloc];
 }
 
-- (void)futureAppend:(FutureProxy *)aFuture
-{
+- (void)futureAppend:(FutureProxy *)aFuture {
 	if (nextFuture) {
 		[nextFuture futureAppend:aFuture];
 	} else {
@@ -57,20 +54,17 @@
 	}
 }
 
-- (void)futureShowSend
-{
+- (void)futureShowSend {
 	NSLog(@"FutureProxy send [%@ %@]\n", 
 		   [[futureActor actorTarget] className], 
 		   NSStringFromSelector([futureInvocation selector]));
 }
 
-- (void)pauseThreadOnQueueLimitMutex
-{
+- (void)pauseThreadOnQueueLimitMutex {
 	[futureQueueLimitMutex pauseThread];
 }
 
-- (void)futureSend
-{
+- (void)futureSend {
 	[futureQueueLimitMutex resumeAnyWaitingThreads];
 	
 	@try {
@@ -93,8 +87,7 @@
 	[futureLock resumeAnyWaitingThreads];
 }
 
-- (void)setFutureResult:(id)anObject
-{
+- (void)setFutureResult:(id)anObject {
 	if (done) {	
 		return;
 	}
@@ -104,8 +97,7 @@
 	[self setFutureValue:anObject];
 }
 
-- (BOOL)isWaitingOnCurrentThread
-{
+- (BOOL)isWaitingOnCurrentThread {
 	// the recursion should avoid loop since the deadlock detection prevents loops
 	
 	for (NSThread *waitingThread in futureWaitingThreads) {		
@@ -117,8 +109,7 @@
 	return NO;
 }
 
-- (void)futurePassExceptionIfNeeded
-{
+- (void)futurePassExceptionIfNeeded {
 	if (futureException) {
 		// guessing we have to wrap the exception so the stack info of original will be available
 		NSMutableDictionary *info = [NSMutableDictionary dictionary];
@@ -132,15 +123,13 @@
 	}
 }
 
-- (void)futureRaiseExceptionIfDeadlock
-{
+- (void)futureRaiseExceptionIfDeadlock {
 	if ([self isWaitingOnCurrentThread]) {
 		[NSException raise:@"Future" format:@"waiting for result on this coroutine would cause a deadlock"];
 	}
 }
 
-- futureResult
-{	
+- futureResult {
 	if (done) {
 		[self futurePassExceptionIfNeeded];
 		return futureValue;
@@ -155,13 +144,11 @@
 }
 
 
-- (void)forwardInvocation:(NSInvocation *)anInvocation
-{
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
 	[anInvocation invokeWithTarget:[self futureResult]];
 }
 
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
-{
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
 	return [[self futureResult] methodSignatureForSelector:aSelector];
 }
 

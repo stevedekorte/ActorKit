@@ -12,39 +12,32 @@
 
 @synthesize batchTarget;
 
-- init
-{
+- init {
     //self = [super init]; // NSProxy doesn't implement init
 	return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
 	[self setBatchTarget:nil];
 	[super dealloc];
 }
 
-- (void)setProxyTarget:anObject
-{
+- (void)setProxyTarget:anObject {
 	[self setBatchTarget:anObject];
 }
 
-- (BOOL)respondsToSelector:(SEL)aSelector
-{
+- (BOOL)respondsToSelector:(SEL)aSelector {
 	return YES;
 }
 
-- (dispatch_queue_t)batchDispatchQueue
-{
+- (dispatch_queue_t)batchDispatchQueue {
 	return dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 }
 
-- (void)forwardInvocation:(NSInvocation *)theInvocation
-{
+- (void)forwardInvocation:(NSInvocation *)theInvocation {
 	__block NSInvocation *anInvocation = theInvocation;
 	
-	if ([[anInvocation methodSignature] methodReturnType][0] != '@')
-	{
+	if ([[anInvocation methodSignature] methodReturnType][0] != '@') {
 		NSString *msg = [NSString stringWithFormat:@"sent '%@' but only methods that return objects are supported",
 						 NSStringFromSelector([anInvocation selector])];
 		NSLog(@"BatchProxy ERROR: %@", msg);
@@ -59,9 +52,7 @@
 	
 	// use an invocation pool?
 	
-	dispatch_apply(length, [self batchDispatchQueue], 
-		^(size_t i)
-		{
+	dispatch_apply(length, [self batchDispatchQueue], ^(size_t i) {
 			//printf("start %i\n", (int)i);
 			id item = [batchTarget objectAtIndex:i];
 			NSInvocation *copyInvocation = [anInvocation copy];
@@ -84,8 +75,7 @@
 	[anInvocation setReturnValue:(void *)&resultsArray];
 }
 
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
-{
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
 	if ([batchTarget count]) {
 		id firstObject = [batchTarget objectAtIndex:0];
 		NSMethodSignature *sig =  [firstObject methodSignatureForSelector:aSelector];

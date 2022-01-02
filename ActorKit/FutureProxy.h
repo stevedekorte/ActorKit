@@ -6,8 +6,7 @@
 
 #import "Mutex.h"
 
-@interface FutureProxy : NSProxy
-{
+@interface FutureProxy : NSProxy {
 	// these use the "future" prefix/suffix to avoid name collision with proxy target
 	
 	id futureActor;

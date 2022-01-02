@@ -10,8 +10,7 @@
 
 @implementation Mutex
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
 	if (self) 
@@ -27,8 +26,7 @@
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
 	pthread_mutexattr_destroy(&mutexAttributes);
 	pthread_mutex_destroy(&mutex);
 	pthread_cond_destroy(&condition);
@@ -36,13 +34,13 @@
 	[super dealloc];
 }
 
-- (BOOL)isPaused
-{
+- (BOOL)isPaused {
 	return isPaused;
 }
 
-- (void)pauseThread // have do be carefull about pauses and resumes mixing...
-{	
+- (void)pauseThread {
+    // have do be carefull about pauses and resumes mixing...
+    
 	pthread_mutex_lock(&mutex);
 	isPaused = YES;
 	
@@ -53,8 +51,7 @@
 	pthread_mutex_unlock(&mutex);
 }
 
-- (void)resumeAnyWaitingThreads
-{	
+- (void)resumeAnyWaitingThreads {	
 	if (isPaused) {
 		pthread_mutex_lock(&mutex);
 		isPaused = NO;	

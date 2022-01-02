@@ -10,8 +10,7 @@
 
 @implementation NSArray (NSArray_Actor)
 
-- asBatch
-{
+- asBatch {
 	return [self proxyForProxyClass:[BatchProxy class]];
 }
 

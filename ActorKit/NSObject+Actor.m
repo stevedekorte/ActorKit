@@ -10,8 +10,7 @@
 
 @implementation NSObject (NSObject_Actor)
 
-- proxyForProxyClass:(Class)aClass
-{
+- proxyForProxyClass:(Class)aClass {
 	id obj = objc_getAssociatedObject(self, (void *)aClass);
 	
 	if (!obj) {
@@ -23,21 +22,18 @@
 	return (id)obj;	
 }
 
-- asActor
-{
+- asActor {
 	return [self proxyForProxyClass:[ActorProxy class]];
 }
 
-- asThreadSafe
-{
+- asThreadSafe {
 	return [self proxyForProxyClass:[ThreadSafeProxy class]];
 }
 
 /*
 static char *actorKey = "ActorProxy";
 
-- asActor
-{
+- asActor {
 	ActorProxy *actor = objc_getAssociatedObject(self, actorKey);
 
 	if (!actor)
@@ -52,8 +48,7 @@ static char *actorKey = "ActorProxy";
 
 static char *synchoronousKey = "ThreadSafeProxy";
 
-- asThreadSafe
-{
+- asThreadSafe {
 	ThreadSafeProxy *sp = objc_getAssociatedObject(self, synchoronousKey);
 	
 	if (!sp)

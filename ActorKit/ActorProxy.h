@@ -9,8 +9,7 @@
 #import "Mutex.h"
 #import "NSThread+Actor.h"
 
-@interface ActorProxy : NSProxy
-{
+@interface ActorProxy : NSProxy {
 	// using the "actor" prefix to avoid name conflict with proxied object
 	id actorTarget;
 	Mutex *actorMutex;

@@ -13,32 +13,27 @@
 @synthesize threadSafeProxyTarget;
 @synthesize threadSafeProxyLock;
 
-- init
-{
+- init {
 	[self setThreadSafeProxyLock:[[[NSLock alloc] init] autorelease]];
 	return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
 	[self setThreadSafeProxyTarget:nil];
 	[self setThreadSafeProxyLock:nil];
 	[super dealloc];
 }
 
-- (void)setProxyTarget:anObject
-{
+- (void)setProxyTarget:anObject {
 	[self setThreadSafeProxyTarget:anObject];
 	[threadSafeProxyLock setName:[threadSafeProxyTarget description]];
 }
 
-- (BOOL)respondsToSelector:(SEL)aSelector
-{
+- (BOOL)respondsToSelector:(SEL)aSelector {
 	return [threadSafeProxyLock respondsToSelector:aSelector];
 }
 
-- (void)forwardInvocation:(NSInvocation *)anInvocation
-{
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
 	// probably could have used @synchronized() {} 
 	// but access to the lock object might be useful later
 	
@@ -47,8 +42,7 @@
 	[threadSafeProxyLock unlock];
 }
 
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
-{
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
 	return [threadSafeProxyTarget methodSignatureForSelector:aSelector];
 }
 

@@ -5,8 +5,7 @@
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
-@interface Mutex : NSObject
-{
+@interface Mutex : NSObject {
 	pthread_mutexattr_t mutexAttributes;
 	pthread_mutex_t mutex;
 	

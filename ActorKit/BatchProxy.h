@@ -5,8 +5,7 @@
 //  Copyright 2011 Steve Dekorte. BSD licensed.
 //
 
-@interface BatchProxy : NSProxy
-{
+@interface BatchProxy : NSProxy {
 	// using the "batch" prefix to avoid name conflict with proxied object
 	id batchTarget;
 }

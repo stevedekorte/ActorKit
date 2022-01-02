@@ -12,8 +12,7 @@
 
 // future
 
-- (void)setWaitingOnFuture:(id)anObject
-{
+- (void)setWaitingOnFuture:(id)anObject {
 	if (anObject == nil) {
 		[[self threadDictionary] removeObjectForKey:@"waitingOnFuture"];
 	} else {
@@ -21,15 +20,13 @@
 	}
 }
 
-- waitingOnFuture
-{
+- waitingOnFuture {
 	return [[self threadDictionary] objectForKey:@"waitingOnFuture"];
 }
 
 // lock
 
-- (void)setLock:(id)anObject
-{
+- (void)setLock:(id)anObject {
 	if (anObject == nil) {
 		[[self threadDictionary] removeObjectForKey:@"lock"];
 	} else {
@@ -37,8 +34,7 @@
 	}
 }
 
-- (NSLock *)lock
-{
+- (NSLock *)lock {
 	NSLock *lock = [[self threadDictionary] objectForKey:@"lock"];
 	
 	if (lock == nil) {

@@ -18,19 +18,16 @@
 @synthesize actorQueueSize;
 @synthesize actorQueueLimit;
 
-- init
-{
+- init {
     //self = [super init]; // NSProxy doesn't implement init
 	return self;
 }
 
-- (void)setProxyTarget:anObject
-{
+- (void)setProxyTarget:anObject {
 	[self setActorTarget:anObject];
 }
 
-- (NSThread *)actorThreadCreateOrResumeIfNeeded
-{
+- (NSThread *)actorThreadCreateOrResumeIfNeeded {
 	NSThread *thread = [self actorThread];
 		
 	if (!thread) {
@@ -48,8 +45,7 @@
 	return thread;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
 	// threads retain the Future's they are waiting on, which retains the actor
 	// so dealloc should only occur when it's safe of dependencies 
 
@@ -60,8 +56,7 @@
 	[super dealloc];
 }
 
-- (FutureProxy *)futurePerformInvocation:(NSInvocation *)anInvocation
-{
+- (FutureProxy *)futurePerformInvocation:(NSInvocation *)anInvocation {
 	BOOL willPauseCaller = NO;
 	NSLock *lock = [[self actorThread] lock];
 	
@@ -93,8 +88,7 @@
 	return future;
 }
 
-- (void)actorRunLoop:sender
-{
+- (void)actorRunLoop:sender {
 	NSLock *lock = [[self actorThread] lock];
 
 	if ([NSThread currentThread] != [self actorThread]) {
@@ -124,13 +118,11 @@
 	[self setActorMutex:nil];
 }
 
-- (BOOL)respondsToSelector:(SEL)aSelector
-{
+- (BOOL)respondsToSelector:(SEL)aSelector {
 	return YES;
 }
 
-- (void)forwardInvocation:(NSInvocation *)anInvocation
-{
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
 	if ([[anInvocation methodSignature] methodReturnType][0] != '@') {
 		NSString *msg = [NSString stringWithFormat:@"sent '%@' but only methods that return objects are supported",
 						 NSStringFromSelector([anInvocation selector])];
@@ -142,8 +134,7 @@
 	[anInvocation setReturnValue:(void *)&f];
 }
 
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
-{
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
 	return [actorTarget methodSignatureForSelector:aSelector];
 }
 
@@ -152,26 +143,22 @@
 // for use from within an actor method executing in order to
 // pause actor thread while waiting on async ops or other callbacks
 
-+ (ActorProxy *)currentActorProxy
-{
++ (ActorProxy *)currentActorProxy {
 	return [[[NSThread currentThread] threadDictionary] objectForKey:@"actorProxy"];
 }
 
-- (id)pauseThread
-{
+- (id)pauseThread {
 	[actorMutex pauseThread];
 	id returnValue = [[[NSThread currentThread] threadDictionary] objectForKey:@"returnValue"];
 	[[[NSThread currentThread] threadDictionary] removeObjectForKey:@"returnValue"];
 	return returnValue;
 }
 
-- (void)resumeThread
-{
+- (void)resumeThread {
 	[actorMutex resumeAnyWaitingThreads];
 }
 
-- (void)resumeThreadWithReturnObject:(id)returnValue
-{
+- (void)resumeThreadWithReturnObject:(id)returnValue {
 	// might move returnValue to ivar
 	[[[NSThread currentThread] threadDictionary] setObject:returnValue forKey:@"returnValue"];
 	[self resumeThread];

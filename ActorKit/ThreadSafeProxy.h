@@ -7,8 +7,7 @@
 // A simple proxy wrapper that synchronizes all messages to the target
 //
 
-@interface ThreadSafeProxy : NSProxy
-{	
+@interface ThreadSafeProxy : NSProxy {	
 	id threadSafeProxyTarget;
 	NSLock *threadSafeProxyLock;
 }
